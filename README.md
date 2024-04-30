@@ -26,3 +26,7 @@ Esto abrirá automáticamente tu navegador predeterminado y cargarás la aplicac
 ¡Disfruta explorando la Pokédex y aprendiendo sobre tus Pokémon favoritos!
 
 ![Pokédex](pokedex.png)
+
+## Video demostrativo
+
+- https://youtu.be/X9w92oRiqTY
