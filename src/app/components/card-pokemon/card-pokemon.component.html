@@ -1,0 +1,9 @@
+<div id="container" [ngClass]="{selected: selected}">
+    <img src="./../../../assets/img/arrow.png" alt="" id="arrow" *ngIf="selected">
+    <div id="card" (click)="onClick(id)" [ngClass]="{selected: selected}">
+        <div id="circle"></div>
+        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{id}}.png" alt="">
+        <span>No. {{id}}</span>
+        <span *ngIf="data">{{data.name | titlecase}}</span>
+    </div>
+</div>
