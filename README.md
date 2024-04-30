@@ -1,27 +1,26 @@
-# Pokedex
+# Pokédex Angular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.5.
+Este proyecto consiste en una Pokédex desarrollada con **Angular**, que muestra información detallada sobre todos los Pokémon disponibles desde la 1º generación hasta la 7º generación.
 
-## Development server
+Para ejecutar la aplicación, asegúrate de tener instalado **Angular CLI**. Si no lo tienes instalado, puedes hacerlo con el siguiente comando:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+```npm install -g @angular/cli```
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Una vez instalado Angular CLI, sigue estos pasos:
 
-## Build
+1. Clona este repositorio en tu máquina local.
+2. Navega hasta la carpeta del proyecto.
+3. Ejecuta el siguiente comando en tu terminal:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```ng serve -o```
 
-## Running unit tests
+Esto abrirá automáticamente tu navegador predeterminado y cargarás la aplicación Pokédex.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Instrucciones de uso
 
-## Running end-to-end tests
+- Al abrir la Pokédex, verás una lista de todos los Pokémon disponibles.
+- Puedes buscar un Pokémon específico utilizando el campo de búsqueda.
+- Haz clic en cualquier Pokémon para ver detalles adicionales, como su tipo, habilidades y más.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+¡Disfruta explorando la Pokédex y aprendiendo sobre tus Pokémon favoritos!
