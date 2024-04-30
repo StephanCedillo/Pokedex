@@ -24,3 +24,5 @@ Esto abrirá automáticamente tu navegador predeterminado y cargarás la aplicac
 - Haz clic en cualquier Pokémon para ver detalles adicionales, como su tipo, habilidades y más.
 
 ¡Disfruta explorando la Pokédex y aprendiendo sobre tus Pokémon favoritos!
+
+![Pokédex](pokedex.png)
