@@ -20,7 +20,6 @@ Esto abrirá automáticamente tu navegador predeterminado y cargarás la aplicac
 ## Instrucciones de uso
 
 - Al abrir la Pokédex, verás una lista de todos los Pokémon disponibles.
-- Puedes buscar un Pokémon específico utilizando el campo de búsqueda.
 - Haz clic en cualquier Pokémon para ver detalles adicionales, como su tipo, habilidades y más.
 
 ¡Disfruta explorando la Pokédex y aprendiendo sobre tus Pokémon favoritos!
