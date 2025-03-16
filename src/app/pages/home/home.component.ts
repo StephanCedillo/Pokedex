@@ -12,7 +12,7 @@ import { Pokemon } from '../../interfaces/pokemon';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, PhotoPokemonComponent, CardPokemonComponent, DetailPokemonComponent],
+  imports: [CommonModule, PhotoPokemonComponent, CardPokemonComponent, DetailPokemonComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -54,7 +54,8 @@ export class HomeComponent implements OnInit {
 
     async clickedCard(id:string){
       if(this.selectedPokemon && id === this.selectedPokemon?.id.toString()){
-        return this.changeStateDetail()
+        return this.toggleDetail();
+        //return this.changeStateDetail()
       }
       this.selectedPokemon = await this.pokemonService.getById(id)
     }
@@ -64,8 +65,13 @@ export class HomeComponent implements OnInit {
       console.log(this.detail)
       
     }
+    toggleDetail() {
+      if (this.selectedPokemon) this.detail = !this.detail;
+      console.log(this.detail);
+    }
+  
+    toggleView() {
+      this.detail = !this.detail;
+    }
   
   }
-
-  
-  

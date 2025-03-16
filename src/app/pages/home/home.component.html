@@ -1,4 +1,6 @@
 <main  id="container">
+    <button (click)="toggleView()" class="toggle-button">Toggle View</button>
+
     <app-detail-pokemon
         [pokemon]="selectedPokemon"
         (clicker)="changeStateDetail()"

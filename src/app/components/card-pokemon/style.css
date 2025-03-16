@@ -1,0 +1,120 @@
+@font-face {
+    font-family: 'Letra';
+    src: url('../../../assets/Letras/Gameplay.ttf') format('opentype');
+        
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Contenedor principal */
+#container {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    flex-direction: column; /* Asegura que el contenido esté en columna */
+    background-color: transparent;
+    padding: 10px;
+    box-sizing: border-box; /* Evita que los paddings alteren el tamaño */
+}
+
+/* Tarjeta */
+#tarjeta {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centra el contenido */
+    background-color: #fcd556;
+    border-radius: 25px;
+    width: 100%; /* Ocupa todo el ancho */
+    max-width: 450px; /* No se hace demasiado grande */
+    padding: 1rem;
+    gap: 0.8rem;
+    transition: background-color 0.3s ease;
+    flex-wrap: wrap; /* Permite mejor distribución en móviles */
+    text-align: center;
+}
+
+/* Círculo */
+#circulo {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Imagen del Pokémon */
+.pokemon-img {
+    width: 2.5rem;
+    height: auto;
+}
+
+/* Nombre y número del Pokémon */
+.pokemon-name {
+    font-family: 'Letra';
+    font-weight: bold;
+    font-size: 1rem;
+    color: #000;
+}
+
+/* Número del Pokémon */
+.pokemon-number {
+    font-family: 'Letra';
+    font-size: 0.9rem;
+    color: #b90e0e;
+}
+
+/* Efecto hover */
+#tarjeta:hover {
+    background-color: #0d8198;
+}
+
+/* Estilo responsivo para texto */
+@media screen and (max-width: 600px) {
+    .pokemon-name {
+        font-size: 0.8rem; /* Reduce el tamaño del nombre en pantallas pequeñas */
+    }
+
+    .pokemon-number {
+        font-size: 0.7rem; /* Reduce el tamaño del número */
+    }
+
+    #tarjeta {
+        padding: 0.8rem; /* Reduce el padding de la tarjeta en pantallas pequeñas */
+    }
+
+    .pokemon-img {
+        width: 2rem; /* Ajusta el tamaño de la imagen */
+    }
+}
+
+/* Flecha que aparece cuando se hace clic */
+#flecha {
+    z-index: 1;
+    display: none;
+    width: 2rem;
+    margin: 0.5em auto;
+    height: auto;
+    margin-top: 1rem;
+}
+
+.selected #flecha {
+    display: block;
+}
+
+/* Responsividad de la flecha */
+@media screen and (max-width: 600px) {
+    #flecha {
+        width: 1.5rem;
+    }
+}
+/* Efecto hover */
+#tarjeta:hover {
+    background-color: #f5af53;
+}
+
+/* Cambia el color de la tarjeta cuando se selecciona */
+.selected #tarjeta {
+    background-color: rgb(229, 66, 66); /* Cambia el fondo de la tarjeta a rojo */
+}

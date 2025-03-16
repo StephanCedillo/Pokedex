@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnChanges, Output, EventEmitter ,ViewChild} from '@angular/core';
 import { Result } from '../../interfaces/pokeapi';
 import { CommonModule } from '@angular/common';
 import { PokemonService } from '../../services/pokemon.service';
@@ -9,9 +9,10 @@ import { Pokemon } from '../../interfaces/pokemon';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './card-pokemon.component.html',
-  styleUrl: './card-pokemon.component.css'
+  styleUrl: './style.css'
 })
 export class CardPokemonComponent implements OnChanges {
+  
   ngOnChanges(): void {
     this.extractInformation()
   }
@@ -24,7 +25,7 @@ export class CardPokemonComponent implements OnChanges {
   @Output() clicked = new EventEmitter<string>(); 
   id:string = "0";
   audio: HTMLAudioElement = new Audio();
-  selectedPokemon?:Pokemon
+  selectedPokemon?: Pokemon;
 
   extractInformation() {
     if(this.data && this.data.url !== ""){
@@ -42,15 +43,24 @@ export class CardPokemonComponent implements OnChanges {
   async onClick(id: string) {
     this.clicked.emit(id);
     this.selectedPokemon = await this.pokemonService.getById(id);
-    this.reproducirSonido(this.selectedPokemon.cries.latest);
+  
+    // Asigna correctamente la URL del sonido
+    const sonidoUrl = "./../assets/music/ring.mp3";  // Solo la URL como cadena
+  
+    if (sonidoUrl) {
+      this.reproducirSonido(sonidoUrl);  // Reproduce el sonido si existe
+    } else {
+      console.error("No se encontró la URL del sonido para este Pokémon.");
+    }
   }
-
+  
   reproducirSonido(url: string) {
-    this.audio.src = url;
+    this.audio.src = url;  // Usa la URL proporcionada
     this.audio.load();
-    this.audio.volume = 0.05;
-    this.audio.play();
+    this.audio.volume = 0.5;  // Volumen ajustado
+    this.audio.play().catch((error) => {
+      console.error("Error al reproducir el sonido:", error);
+    });
   }
-
-
+  
 }
