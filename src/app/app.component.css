@@ -1,11 +1,13 @@
 @font-face {
     font-family: 'Pokemon';
-    src: url('./../assets/Letras/Pokemon.ttf');
+    src: url('./../assets/Letras/Pokemon.ttf') format('truetype');
 }
+
 body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    font-family: 'Pokemon';
 }
 
 footer {
@@ -23,18 +25,44 @@ footer {
     width: 100%;
 }
 
-header {
-    font-family: Pokemon;
-    background: linear-gradient(135deg, #ff4e50, #f9d423);
-    padding: 20px 0;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    border-bottom: 5px solid #d62828;
-    position: relative;
-    overflow: hidden;
+footer button {
+    background: none;
+    border: none;
+    color: #f0fbff;
+    font-size: 0.9rem;
+    cursor: pointer;
+    padding: 5px 10px;
+    margin: 0 15px;
+    display: inline-flex;
+    align-items: center;
+    transition: color 0.3s ease, transform 0.3s ease;
 }
 
+footer button:hover {
+    color: #fff;
+    transform: scale(1.1);
+}
+
+footer kbd {
+    display: inline-block;
+    background-color: #9e3e2f;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    font-size: large;
+    margin: 0 5px;
+}
+
+footer kbd:hover {
+    background-color: #7e2f2f;
+    transform: translateY(-2px);
+}
+
+
+
 #container-title {
-    font-family: Pokemon;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -43,10 +71,11 @@ header {
 }
 
 #container-title h1 {
-    font-size: 1.5rem;
+    font-family: 'Pokemon';
+    top:5px;
+    font-size: 1rem;
     color: #fff;
     text-shadow: 3px 3px 0px #000;
-    font-family: Pokemon;
     letter-spacing: 2px;
     animation: glow 1.5s infinite alternate;
 }
@@ -56,21 +85,24 @@ header {
     height: 50px;
     filter: drop-shadow(3px 3px 5px rgba(0, 0, 0, 0.5));
     transition: transform 0.3s ease-in-out;
-    
-    /* Agregar animaciones por defecto */
     animation: pulse 2s infinite alternate, floating 4s infinite ease-in-out;
 }
 
 #container-title img:hover {
     transform: rotate(360deg) scale(1.2);
 }
+
 main {
     flex: 1;
     overflow-y: auto;
-    padding-bottom: 60px; /* Asegura espacio para el footer */
+    padding-bottom: 20px; /* Asegura espacio para el footer */
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh); /* Ajusta para no ocupar header y footer */
+    overflow-y: auto; /* Agrega scroll si el contenido es más grande */
 }
 
-/* Efecto de brillo en el título */
+/* Animaciones */
 @keyframes glow {
     0% {
         text-shadow: 3px 3px 0px #000, 0 0 5px #ffdd00, 0 0 10px #ffdd00;
@@ -80,7 +112,6 @@ main {
     }
 }
 
-/* Efecto de latido para las imágenes */
 @keyframes pulse {
     0% {
         transform: scale(1);
@@ -90,7 +121,6 @@ main {
     }
 }
 
-/* Efecto de flotación sutil */
 @keyframes floating {
     0% {
         transform: translateY(0px);
@@ -103,51 +133,13 @@ main {
     }
 }
 
-
-
-footer {
-    background-color: #d32f2f; /* Rojo más oscuro */
-    height: 50px;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    color: #f0fbff;
-    padding: 10px 20px;
-    unicode-bidi: isolate;
-    border-top: 3px solid #3e0c10;
-
-    p {
-        margin: 0 15px;
-        font-size: 0.9rem;
-    }
-
-    kbd {
-        display: inline-block;
-        background-color: #9e3e2f; /* Rojo oscuro */
-        border-radius: 50%;
-        width: 28px;
-        line-height: 28px;
-        text-align: center;
-        aspect-ratio: 1;
-        font-size: large;
-        margin: 0 5px;
-        transition: background-color 0.4s ease, transform 0.3s ease-in-out;
-    }
-
-    kbd:hover {
-        background-color: #7e2f2f; /* Rojo aún más oscuro */
-        transform: translateY(-2px); /* Efecto sutil de desplazamiento */
-    }
-}
-
 /* Reproductor de música */
 #backgroundMusic {
-    display: none; /* Se oculta el reproductor de música */
+    display: none;
 }
 
 /* Estilos para mejorar la responsividad */
 @media (max-width: 768px) {
-
     #container-title h1 {
         font-size: 1.8rem;
     }
@@ -156,38 +148,27 @@ footer {
         width: 35px;
         height: 35px;
     }
+
     header {
         align-items: center;
         height: 80px;
         padding: 0 20px;
     }
 
-    #container-title {
-        width: 250px;
-    }
-
     footer {
-        background-color: #d32f2f;
         height: 50px;
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        color: #f0fbff;
-        padding: 10px 20px;
-        unicode-bidi: isolate;
-        border-top: 3px solid #3e0c10;
-        position: fixed;
-        bottom: 0;
-        width: 100%;
     }
-    
 
-    kbd {
+    footer button {
         font-size: medium;
-        width: 24px;
-        line-height: 24px;
+    }
+
+    footer kbd {
+        font-size: medium;
     }
 }
+
+/* Estilo de la barra de búsqueda */
 .search {
     --input-line: #cccccc;
     --input-text-color: #808080;
@@ -199,9 +180,9 @@ footer {
     --search-min-width: 150px;
     --border-radius: 5px;
     --transition-cubic-bezier: 150ms cubic-bezier(0.4,0,0.2,1);
-  }
-  
-  .search-box {
+}
+
+.search-box {
     max-width: var(--search-max-width);
     min-width: var(--search-min-width);
     height: 35px;
@@ -211,22 +192,21 @@ footer {
     background: var(--input-bg-color);
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     transition: var(--transition-cubic-bezier);
-  }
-  
-  .search-box:hover {
+}
+
+.search-box:hover {
     border-color: var(--input-border-hover-color);
-  }
-  
-  /*Section input*/
-  .search-field {
+}
+
+.search-field {
     position: relative;
     width: 100%;
     height: 100%;
     left: -5px;
     border: 0;
-  }
-  
-  .input {
+}
+
+.input {
     width: calc(100% - 29px);
     height: 100%;
     border: 0;
@@ -237,55 +217,53 @@ footer {
     background: var(--input-bg-color);
     border-right: 2px solid var(--input-border-color);
     outline: none;
-  }
-  
-  .input::-webkit-input-placeholder {
+}
+
+.input::-webkit-input-placeholder {
     color: var(--input-text-color);
-  }
-  
-  .input::-moz-input-placeholder {
+}
+
+.input::-moz-input-placeholder {
     color: var(--input-text-color);
-  }
-  
-  .input::-ms-input-placeholder {
+}
+
+.input::-ms-input-placeholder {
     color: var(--input-text-color);
-  }
-  
-  .input:focus::-webkit-input-placeholder {
+}
+
+.input:focus::-webkit-input-placeholder {
     color: var(--input-text-hover-color);
-  }
-  
-  .input:focus::-moz-input-placeholder {
+}
+
+.input:focus::-moz-input-placeholder {
     color: var(--input-text-hover-color);
-  }
-  
-  .input:focus::-ms-input-placeholder {
+}
+
+.input:focus::-ms-input-placeholder {
     color: var(--input-text-hover-color);
-  }
-  
-  /*Search button*/
-  /*Search button*/
+}
+
 .search-box-icon {
-    width: 80px; /* Aumenta el tamaño horizontal */
+    width: 80px;
     height: 35px;
     position: absolute;
     top: -6px;
-    right: -30px; /* Ajusta el posicionamiento si es necesario */
+    right: -30px;
     background: transparent;
     border-bottom-right-radius: var(--border-radius);
     border-top-right-radius: var(--border-radius);
     transition: var(--transition-cubic-bezier);
 }
-  
+
 .search-box-icon:hover {
     background: var(--input-border-color);
 }
-  
+
 .btn-icon-content {
-    width: 80px; /* Igual tamaño que el de .search-box-icon */
+    width: 80px;
     height: 35px;
     top: -6px;
-    right: -30px; /* Alineación */
+    right: -30px;
     background: transparent;
     border: none;
     cursor: pointer;
@@ -294,21 +272,15 @@ footer {
     transition: var(--transition-cubic-bezier);
     opacity: .4;
 }
-  
+
 .btn-icon-content:hover {
     opacity: .8;
 }
-  
+
 .search-icon {
-    width: 25px; /* Icono más grande */
-    height: 25px; /* Asegura que el icono no quede tan pequeño */
+    width: 25px;
+    height: 25px;
     position: absolute;
     top: 7px;
-    right: 25px; /* Ajusta la posición del icono */
-}
-main {
-    display: flex;
-    flex-direction: column;
-    height: calc(100vh - 125px); /* Ajusta para no ocupar header y footer */
-    overflow-y: auto; /* Agrega scroll si el contenido es más grande */
+    right: 25px;
 }

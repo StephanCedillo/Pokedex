@@ -1,5 +1,12 @@
 {
   "routes": [
-    "/"
+    "/",
+    "/avatar",
+    "/capturar",
+    "/detalle",
+    "/home",
+    "/inventario",
+    "/login",
+    "/registro"
   ]
 }

@@ -1,0 +1,45 @@
+<header>
+    <div id="container-title">
+      <h1>BIENVENIDO - Elige tu avatar</h1>
+      <img src="assets/img/pokeball.png" alt="Pokeball">
+      <img src="assets/img/pokeball.png" alt="Pokeball">
+    </div>
+  </header>
+  
+  <!-- Si NO hay un avatar seleccionado, muestra la lista -->
+  <div *ngIf="!selectedAvatar">
+    <div *ngFor="let avatar of avatars" class="card">
+      <div class="card-header">
+        <span class="title">{{ avatar.title }}</span>
+        <span class="type">{{ avatar.type }}</span>
+      </div>
+      <div class="card-name">
+        <h2>{{ avatar.name }}</h2>
+      </div>
+      <div class="card-image">
+        <img [src]="avatar.image" [alt]="avatar.title">
+      </div>
+      <div class="card-text">
+        <p>{{ avatar.description }}</p>
+      </div>
+      <div class="card-footer">
+        <button class="select-button" 
+          (click)="seleccionarAvatar(avatar)" 
+          [attr.aria-label]="'Seleccionar ' + avatar.title">
+          Seleccionar
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Si HAY un avatar seleccionado, muestra solo ese -->
+  <div *ngIf="selectedAvatar" class="selected-card">
+    <h2>Hola, soy {{ selectedAvatar.name }}.</h2>
+    <p>{{ selectedAvatar.message }}</p>
+    <img [src]="selectedAvatar.image" [alt]="selectedAvatar.title">
+  
+    <button class="change-button" (click)="cambiarAvatar()">
+      Cambiar personaje
+    </button>
+  </div>
+  

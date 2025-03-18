@@ -1,149 +1,134 @@
-/* General container style */
 @font-face {
   font-family: 'bros';
   src: url('../../../assets/Letras/Bros.ttf') format('opentype');
-      
   font-weight: normal;
   font-style: normal;
 }
+
+/* General container style */
 #container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   border: 4px solid #ffee00;
   outline: 12px solid #f8e55c;
-  width: 100vw; /* Width is a percentage of the viewport */
-  height: 75vh; /* Height is 90% of the viewport */
-  max-width: 400px; /* Max width on larger screens */
-  aspect-ratio: 1; /* Maintains a square aspect ratio */
+  width: 100%;
+  max-width: 100vw; /* Ensure container is not wider than the screen */
+  height: auto;
   border-radius: 25px;
-  margin: auto; /* Centers the container */
-  padding: 1rem; /* Adds some padding */
-  overflow: hidden; /* Prevents overflow issues */
+  margin: auto;
+  padding: 1rem;
+  overflow-x: hidden; /* Prevent horizontal overflow */
+  overflow-y: auto; /* Enable vertical scrolling */
   background-image: url(./../../../assets/img/iop.jpg);
+  background-size: cover;
+  background-position: center;
 }
+
+/* Etiquetas con mejor diseño */
 .label {
-  align-items: center;
   display: inline-block;
   background-color: #67bcea;
-  border-radius: 5px;
-  color: #000000;
-  padding: 5px 20px;
-  font-size: clamp(14px, 4vw, 24px); /* Ajusta el tamaño del texto dinámicamente */
-  width: auto; /* Permite que el ancho se ajuste al contenido */
-  min-width: 80px; /* Evita que sea demasiado pequeño */
-  max-width: 100%; /* No sobrepasa el contenedor */
+  border-radius: 8px;
+  color: #ffffff;
+  padding: 8px 16px;
+  font-size: clamp(14px, 4vw, 18px);
+  width: auto;
+  min-width: 80px;
   text-align: center;
   margin-right: 10px;
-  white-space: nowrap; /* Evita que se corte el texto en varias líneas */
+  white-space: nowrap;
+  word-wrap: break-word;
 }
 
-/* Image inside the container */
-#container img {
-  width: 80%;
-  max-width: 100%;
-  height: auto;
-  image-rendering: pixelated;
-  margin-bottom: 1rem; /* Adds space between the image and other content */
-}
-
-/* Layout for data area */
+/* Layout para la sección de datos */
 #data {
-  padding-top: 180px;
-  margin-top: 100px;
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
-  text-align: right;
-  overflow-y: auto; /* Allows scrolling inside the data section if content overflows */
+  text-align: center;
+  overflow-y: auto;
+  padding: 1rem;
 }
+
+/* Diseño mejorado de cada área */
 .area {
-  font-family: bros;
-  flex-direction: column;
-  font-size: 10px;
-  margin-bottom: 1rem; /* Space between each area */
-  width: 100%; /* Full width */
-  text-align: center; /* Center text inside each area */
-  color: rgb(0, 0, 0);
-  background-color: rgb(255, 255, 255);
-  border-radius: 30px;
-  background-size: 20px 20px;
-
-  p{
-    margin: 30px 0px
-}
-}
-
-.type, p span:last-child {
-  font-weight: bold;
-  color: black;
-  flex: 1;
-  text-align: right; /* Alinea los valores */
-}
-/* Responsiveness for screens smaller than 480px (mobile) */
-@media (max-width: 480px) {
-  #container {
-      width: 50vw; /* Wider container on mobile */
-      outline: 6px solid #f8e55c; /* Lighter outline on mobile */
-  }
-
-  #container img {
-      width: 90%; /* Larger image on small screens */
-  }
-
-  .area p {
-      font-size: 0.9rem; /* Adjust font size on small screens */
-  }
-}
-
-/* Responsiveness for tablets (screens less than 768px) */
-@media (max-width: 768px) {
-  #container {
-      width: 90vw; /* Slightly smaller container */
-      max-width: 320px; /* Restrict max width */
-  }
-
-  .area p {
-      font-size: 1rem; /* Adjust font size for readability */
-  }
-}
-
-/* Card Pokemon */
-app-card-pokemon {
-  width: 100%;
+  font-family: 'bros', sans-serif;
+  font-size: 14px;
   margin-bottom: 1rem;
+  width: 100%;
+  text-align: center;
+  color: rgb(0, 0, 0);
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 20px;
+  padding: 15px;
+  overflow-y: auto;
+  max-height: auto; /* Limita la altura máxima de cada área */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  word-wrap: break-word;
+  overflow-wrap: break-word; /* Prevents text overflow */
 }
 
-/* Adjust button and arrow icon */
-button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 0.5rem;
+/* Mejorar la apariencia de las imágenes */
+#gallery .gallery-container img {
+  width: 100%;
+  max-width: 100%;
+  margin: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
-button img {
-  width: 2rem;
-  transition: transform 0.3s ease; /* Add smooth transition to arrow rotation */
+#cry audio {
+  width: 100%;
+  max-width: 400px;
+  margin-top: 10px;
 }
 
-button img.girar {
-  transform: rotate(180deg); /* Rotate the arrow on click */
-}
-
-/* Flex layout for small screens */
-@media (max-width: 600px) {
-  #data {
-    padding: auto;
-      flex-direction: column; /* Stack the areas vertically */
+/* Responsivo */
+@media (max-width: 1024px) {
+  #container {
+    padding: 1rem;
   }
 
   .area {
-      text-align: center; /* Center the text in each area */
+    max-height: none;
+    padding: 10px;
+  }
+
+  #gallery .gallery-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  #gallery .gallery-container img {
+    max-width: 200px;
+    margin: 5px;
+  }
+}
+
+@media (max-width: 600px) {
+  #container {
+    padding: 0.5rem;
+  }
+
+  .area {
+    padding: 8px;
+    font-size: 12px;
+  }
+
+  .label {
+    font-size: 14px;
+  }
+
+  #gallery .gallery-container img {
+    max-width: 100px;
+    margin: 5px;
+  }
+
+  #cry audio {
+    max-width: 100%;
   }
 }

@@ -15,6 +15,7 @@
     background-color: transparent;
     padding: 10px;
     box-sizing: border-box; /* Evita que los paddings alteren el tamaño */
+    
 }
 
 /* Tarjeta */
@@ -118,3 +119,4 @@
 .selected #tarjeta {
     background-color: rgb(229, 66, 66); /* Cambia el fondo de la tarjeta a rojo */
 }
+

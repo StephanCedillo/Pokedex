@@ -6,4 +6,5 @@ const config: CapacitorConfig = {
   webDir: 'dist/pokedex/browser'
 };
 
+
 export default config;

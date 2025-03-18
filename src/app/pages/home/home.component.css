@@ -1,5 +1,9 @@
+
+
+@import url('https://fonts.googleapis.com/css2?family=Modak&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap');
 #container {
-    height: calc(100vh - 103px);
+    height: calc(100vh - 30px);
     display: grid;
     align-items: center;
     grid-template-columns: 1.2fr 1fr;
@@ -39,21 +43,10 @@
 /* Foto del Pokémon */
 app-photo-pokemon {
     margin-left: 120px;
-    z-index: 2;
     transition: 0.5s ease-in-out;
-}
-app-photo-pokemon.openned {
-    margin-top: 50px;
-    margin-left: 150px;
 }
 
-/* Detalle del Pokémon (inicialmente oculto) */
-app-detail-pokemon {
-    position: absolute;
-    z-index: 1;
-    left: -300vw;
-    transition: 0.5s ease-in-out;
-}
+
 app-detail-pokemon.openned {
     left: 0;
 }
@@ -63,12 +56,40 @@ app-detail-pokemon.openned {
     display: flex;
     flex-direction: column;
     gap: 5px;
-    max-height: 90%;
+    max-height: 100%;
     overflow-y: scroll;
     margin-left: auto;
     padding-right: 20px;
 }
-
+#cards-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    max-height: 100%;
+    overflow-y: scroll;
+    margin-left: auto;
+    padding-right: 20px;
+}
+.pokemon-inventory{
+    
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Espacio entre cartas */
+    padding: 15px; /* Espaciado interno */
+    width: 100%; /* Ocupar todo el ancho disponible */
+    height: 100%;
+    max-height: 100%;
+    overflow-y: auto;
+    padding-right: 15px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    max-height: 100%;
+    overflow-y: scroll;
+    margin-left: auto;
+    padding-right: 20px;
+}
 /* Botón de alternancia */
 .toggle-button {
     position: absolute;
@@ -92,11 +113,17 @@ app-detail-pokemon.openned {
         margin-left: 0;
     }
     #cards-container {
-        max-height: 80vh;
         padding-right: 0;
     }
 }
-
+header {
+    background: linear-gradient(135deg, #ff4e50, #f9d423);
+    padding: 20px 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    border-bottom: 5px solid #d62828;
+    position: relative;
+    overflow: hidden;
+}
 @media (max-width: 600px) {
     .toggle-button {
         left: 50%;
@@ -104,7 +131,7 @@ app-detail-pokemon.openned {
     }
 }
 #container {
-    height: calc(100vh - 103px);
+    height: calc(100vh - 30px);
     display: grid;
     align-items: center;
     grid-template-columns: 1.2fr 1fr;
@@ -125,7 +152,7 @@ app-detail-pokemon.openned {
     padding: 15px; /* Espaciado interno */
     width: 100%; /* Ocupar todo el ancho disponible */
     height: 100%;
-    max-height: 90%;
+    max-height: 100%;
     overflow-y: auto;
     padding-right: 15px;
     box-sizing: border-box;
@@ -144,12 +171,22 @@ app-card-pokemon {
         grid-template-columns: 1fr;
         padding: 10px;
     }
-    #cards-container {
-        height: 50vh; /* Reducido a 40% de la pantalla */
-        max-height: 50vh;
+    .pokemon-inventory{
+        height: 100vh; /* Reducido a 40% de la pantalla */
+        max-height: 100vh;
         overflow-y: auto;
         padding: 10px;
         padding-bottom: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+    #cards-container {
+    /* Reducido a 40% de la pantalla */
+        max-height: 100vh;
+        overflow-y: auto;
+        padding: 10px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -181,4 +218,445 @@ app-card-pokemon {
 
 
 
+/* Estilo global */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
+/* Barra de navegación */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #b8c2b615;
+    padding: 1px 1px;
+}
+
+
+
+/* Botón hamburguesa */
+.navbar .hamburger {
+    background-color: #007bff;
+    width: 100%;
+    display: none; /* Oculto por defecto, se muestra solo en pantallas pequeñas */
+    background: none;
+    border: none;
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+    margin-left:23rem;
+}
+
+/* Estilo del menú lateral (side menu) */
+.navbar .nav {
+    position: fixed;
+    top: 0;
+    left: -250px; /* Inicialmente fuera de la pantalla */
+    width: 250px;
+    height: 100vh;
+    background-color: #34495e;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 20px;
+    transition: left 0.3s ease;
+    z-index: 1000;
+}
+
+/* Estilo de la lista */
+.navbar .nav ul {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+}
+
+.navbar .nav ul li {
+    margin: 15px 0;
+}
+
+/* Botones dentro del menú */
+.navbar .nav button {
+    
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    font-family: Poetsen One;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 10px 20px;
+    width: 100%;
+    text-align: left;
+    transition: background-color 0.3s ease;
+}
+
+/* Efecto de hover en los botones */
+.navbar .nav button:hover {
+    background-color: #378d58;
+    border-radius: 5px;
+}
+
+/* Mostrar el menú cuando se activa */
+.navbar .nav.active {
+    left: 0; /* Mueve el menú a la vista */
+}
+
+/* Mostrar el contenido principal cuando el menú está abierto */
+body {
+    margin-left: 0;
+    padding-left: 0;
+    transition: margin-left 0.3s ease;
+}
+
+.navbar .nav.active + body {
+    margin-left: 250px; /* Deja espacio para el menú lateral */
+}
+
+/* Menú horizontal para pantallas grandes */
+/* Estilo del navbar para pantallas grandes */
+@media (min-width: 769px) {
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 2px 10px;
+    }
+
+    .navbar .nav {
+        position: static; /* Se vuelve parte del flujo normal */
+        width: auto;
+        height: auto;
+        display: flex;
+        flex-direction: row; /* Asegura que los elementos estén en línea */
+        background-color: transparent; /* Fondo transparente en pantallas grandes */
+        align-items: center;
+    }
+
+    /* Los botones dentro del nav se alinean en una fila */
+    .navbar .nav ul {
+        display: flex;
+        flex-direction: row;
+        gap: 15px; /* Espacio entre elementos */
+    }
+
+    .navbar .nav ul li {
+        margin: 0;
+    }
+
+    .navbar .nav button {
+        width: auto;
+        padding: 10px 15px;
+        background: none;
+        text-align: center;
+        font-size: 14px;
+    }
+
+    /* Oculta el menú lateral en pantallas grandes */
+    .navbar .nav.active {
+        left: auto;
+    }
+
+    /* Oculta el botón hamburguesa en pantallas grandes */
+    .navbar .hamburger {
+        display: none;
+    }
+}
+
+/* Mostrar el botón hamburguesa solo en pantallas pequeñas */
+@media (max-width: 768px) {
+    .navbar .nav {
+        left: -250px; /* Inicialmente fuera de la pantalla */
+    }
+
+    .navbar .hamburger {
+        display: block; /* Muestra el botón hamburguesa */
+    }
+
+    .navbar .nav.active {
+        left: 0; /* Mueve el menú a la vista */
+    }
+
+    body {
+        transition: margin-left 0.3s ease;
+    }
+
+    /* Ajustes de estilo cuando el menú está abierto */
+    .navbar .nav.active + body {
+        margin-left: 250px;
+    }
+}
+.pokemon-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 1200px; /* Evita que sea demasiado ancho en pantallas grandes */
+    margin: 0 auto;
+    padding: 20px;
+    gap: 15px;
+    background: rgba(0, 0, 0, 0.5); /* Fondo semitransparente para resaltar */
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Ajuste para tablets */
+@media (max-width: 1024px) {
+    .pokemon-display {
+        flex-direction: column;
+        max-width: 100%;
+        padding: 15px;
+        background: rgba(0, 0, 0, 0.6);
+    }
+}
+
+/* Ajuste para móviles */
+@media (max-width: 600px) {
+    .pokemon-display {
+        width: 100%;
+        padding: 10px;
+        gap: 10px;
+        background: rgba(0, 0, 0, 0.7);
+    }
+    
+    app-photo-pokemon,
+    app-detail-pokemon {
+        width: 100%;
+    }
+}
+
+.pokemon-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    max-width: 1200px; /* To prevent it from becoming too wide on large screens */
+    margin: 0 auto;
+    padding: 20px;
+    gap: 15px;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    overflow-y: auto; /* Enable vertical scrolling */
+    max-height: 80vh; /* Limit the height */
+}
+
+/* Ensuring it's scrollable */
+#pokemon-display::-webkit-scrollbar {
+    width: 10px;
+}
+
+#pokemon-display::-webkit-scrollbar-thumb {
+    background-color: #e9563d;
+    border-radius: 5px;
+}
+
+#pokemon-display::-webkit-scrollbar-track {
+    background: #1c4760;
+}
+/* General styles for the navbar */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #a81717fe;
+    padding: 5px 5px;
+}
+
+/* Style the hamburger button */
+.navbar .hamburger {
+    background-color: #007bff;
+    width: 40px;
+    height: 40px;
+    display: none; /* Initially hidden on large screens */
+    background: none;
+    border: none;
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+    margin-left: 15px;
+    padding: 0;
+    transition: transform 0.3s ease; /* Added transition for smooth effect */
+}
+
+/* Add an animation for hamburger button when clicked */
+.navbar .hamburger.active {
+    transform: rotate(90deg); /* Rotate when active */
+}
+
+/* Style the side navigation menu */
+.navbar .nav {
+    position: fixed;
+    top: 0;
+    left: -250px; /* Initially out of the screen */
+    width: 250px;
+    height: 100vh;
+    background-color: #9c2020;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 20px;
+    transition: left 0.3s ease, box-shadow 0.3s ease; /* Added shadow transition */
+    z-index: 1000;
+    box-shadow: 4px 0 10px rgba(133, 14, 14, 0.731);
+}
+
+/* Style for the menu when it's active */
+.navbar .nav.active {
+    left: 0; /* Make the menu visible */
+    box-shadow: 5px 0 15px rgba(0, 0, 0, 0.3); /* Enhanced shadow when the menu is open */
+}
+
+/* Style for each link in the menu */
+.navbar .nav ul li {
+    list-style: none;
+    margin: 10px 0;
+    width: 100%;
+    text-align: left;
+}
+
+/* Style for links in the menu */
+.navbar .nav ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 10px;
+    display: block;
+    transition: background-color 0.3s ease, padding-left 0.3s ease;
+}
+
+/* Hover effect for links */
+.navbar .nav ul li a:hover {
+    background-color: #007bff;
+    padding-left: 20px; /* Slight indentation when hovered */
+}
+
+/* Display horizontal navbar on larger screens */
+@media (min-width: 769px) {
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .navbar .nav {
+        position: static;
+        display: flex;
+        flex-direction: row;
+        width: auto;
+        height: auto;
+        background-color: transparent;
+        align-items: center;
+        box-shadow: none; /* Remove shadow on large screens */
+    }
+
+    .navbar .nav ul {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+    }
+
+    .navbar .nav button {
+        width: auto;
+        padding: 10px 20px;
+        background: none;
+        text-align: center;
+        font-size: 14px;
+    }
+
+    .navbar .hamburger {
+        display: none; /* Hide the hamburger button on larger screens */
+    }
+}
+
+/* Show the hamburger button and make the menu mobile-friendly for smaller screens */
+@media (max-width: 768px) {
+    .navbar .nav {
+        left: -250px; /* Initially hide the menu off-screen */
+    }
+
+    .navbar .hamburger {
+        display: block; /* Show the hamburger button */
+    }
+
+    /* Show the menu when active */
+    .navbar .nav.active {
+        left: 0;
+    }
+
+    body {
+        transition: margin-left 0.3s ease;
+    }
+
+    .navbar .nav.active + body {
+        margin-left: 250px; /* Shift the body when the menu is active */
+    }
+
+    /* Add a nice transition for the background of the links */
+    .navbar .nav ul li a {
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* Adjust the size of the text and add padding for smaller screens */
+    .navbar .nav ul li a {
+        font-size: 16px;
+        padding: 15px;
+    }
+}
+.pokemon-avatar {
+    width: 100%;
+    max-height: 100vh; /* Ajusta la altura según necesites */
+    overflow-y: auto; /* Habilita el scroll vertical */
+    border: 2px solid #ccc; /* Opcional, solo para visualizar el contenedor */
+    padding: 10px;
+}
+.pokedex-title {
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #fff;
+    background: #d32f2f;
+    padding: 15px 25px;
+    border-radius: 12px;
+    display: inline-block;
+    text-align: center;
+    border: 4px solid #8b0000;
+    box-shadow: 0px 6px 0px #8b0000, 0px 6px 12px rgba(0, 0, 0, 0.5);
+    letter-spacing: 2px;
+    transition: transform 0.2s ease-in-out;
+    position: relative;
+    font-family: 'Press Start 2P', cursive; /* Fuente pixelada estilo retro */
+}
+
+.pokedex-title::before {
+    content: "";
+    position: absolute;
+    top: 8px;
+    left: 12px;
+    width: 12px;
+    height: 8px;
+    background-color: #ffcc00;
+    border-radius: 50%;
+    box-shadow: 0px 0px 8px rgba(255, 204, 0, 0.8);
+}
+
+.pokedex-title:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.7);
+}

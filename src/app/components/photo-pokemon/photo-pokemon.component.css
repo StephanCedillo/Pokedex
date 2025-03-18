@@ -2,19 +2,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 4px solid #8cbbf1;
-    outline: 12px solid #f8e55c;
+    
     width: 90vw; /* Usa un porcentaje del viewport */
     max-width: 400px; /* Máximo tamaño en pantallas grandes */
     aspect-ratio: 1; /* Mantiene el cuadrado */
     border-radius: 25px;
-    background: repeating-linear-gradient(
-        to bottom,
-        #f5f7f9,
-        #f5f7f9 15px,
-        #c9e2f4 15px,
-        #c9e2f4 25px
-    );
+    
     margin: auto; /* Centra horizontalmente */
 }
 
@@ -30,7 +23,7 @@
 @media (max-width: 480px) {
     #container {
         width: 80vw; /* Más ancho en móviles */
-        outline: 6px solid #f8e55c; /* Menos grosor */
+       /* Menos grosor */
     }
 
     #container img {

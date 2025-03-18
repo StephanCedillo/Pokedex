@@ -1,0 +1,145 @@
+/* Fondo blanco para el body */
+.random-pokemon {
+    background-color: white;
+    font: 18px/2 "Ubuntu", "Microsoft JhengHei", sans-serif;
+    margin: 0 auto;
+    padding: 1rem;
+    max-width: 400px;
+    height: 100vh;
+  }
+  
+  /* Botón fijo */
+  .fixed-button {
+    position: fixed;
+    bottom: 75px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #f4d03f;
+    border: none;
+    padding: 1rem;
+    border-radius: 50px;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+  
+  .fixed-button:hover {
+    background-color: #f39c12;
+  }
+  
+  /* Contenedor de carga */
+  .loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .loading-gif {
+    width: 100px;
+    height: 100px;
+    animation: rotate 1s infinite;
+  }
+  
+  /* Animación de rotación del GIF */
+  @keyframes rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  /* Estilo de la tarjeta del Pokémon */
+  .poke-card {
+    display: flex;
+    margin: 1.5em auto;
+    border-radius: 1em;
+    max-width: 400px;
+    background: #fff;
+    box-shadow: 0 1rem 40px rgba(34, 35, 58, 0.25);
+    flex-direction: row;
+    overflow: hidden;
+    cursor: default;
+    color: #333;
+  }
+  
+  .poke-back {
+    flex: 2;
+    position: relative;
+    background-position: top center;
+    background-size: cover;
+  }
+  
+  .poke-back img {
+    display: block;
+    position: absolute;
+    max-width: unset;
+    height: 100%;
+  }
+  
+  .poke-data {
+    flex: 1;
+    position: relative;
+    padding: 1.5em 2em;
+    text-align: right;
+    background: rgb(255, 255, 255, 0.9);
+  }
+  
+  .poke-id {
+    font-size: 1.5em;
+    text-align: right;
+  }
+  
+  .poke-type {
+    font-size: 0.8em;
+    font-weight: bold;
+    text-transform: capitalize;
+  }
+  
+  .poke-type span {
+    display: inline-block;
+    margin-left: 0.5em;
+  }
+  
+  .text-grass { color: green; }
+  .text-poison { color: #a866c8; }
+  .text-fire { color: #ff9c54; }
+  .text-water { color: #4f92d6; }
+  .text-bug { color: #91c12d; }
+  .text-ground { color: #d97846; }
+  .text-rock { color: #cdbf8e; }
+  .text-normal { color: #919aa1; }
+  .text-dragon { color: #096ac1; }
+  .text-dark { color: #5a5467; }
+  .text-flying { color: #90a9de; }
+  .text-fairy { color: #ed8ee5; }
+  .text-fighting { color: #ce406a; }
+  .text-psychic { color: #f87479; }
+  .text-electric { color: #f4d23d; }
+  .text-steel { color: #53879c; }
+  .text-ice { color: #74cec1; }
+  .text-ghost { color: #5469ad; }
+  
+  .poke-icon {
+    position: absolute;
+    top: 1em;
+    left: -4em;
+    border: 6px solid #fff;
+    border-radius: 50%;
+    width: 4em;
+    height: 4em;
+    transform: translateX(25%);
+    background-size: contain;
+    background: #eee no-repeat center;
+  }
+  
+  .poke-grass .poke-back {
+    background-image: url(https://example.com/grass-background.png);
+  }
+  
+  .poke-grass .poke-icon {
+    background-image: url(https://example.com/grass-icon.png);
+  }
+  

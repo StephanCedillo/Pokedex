@@ -1,0 +1,21 @@
+<div class="random-pokemon">
+    <button (click)="getRandomPokemon()" class="fixed-button">Obtener Pokémon Aleatorio</button>
+  
+    <div *ngIf="isLoading" class="loading-container">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0yxO-NzzSyUs_6ga4aK65j0oNfreNcpfS2A&s" alt="Cargando..." class="loading-gif">
+    </div>
+  
+    <div *ngIf="randomPokemon" class="poke-card">
+      <div class="poke-back">
+        <img [src]="randomPokemon.sprites.front_default" alt="{{ randomPokemon.name }}">
+      </div>
+      <div class="poke-data">
+        <p class="poke-id">No. {{ randomPokemon.id }}</p>
+        <h2>{{ randomPokemon.name }}</h2>
+        <p class="poke-type">
+          <span *ngFor="let type of randomPokemon.types" [ngClass]="'text-' + type.type.name">{{ type.type.name }}</span>
+        </p>
+      </div>
+    </div>
+  </div>
+  

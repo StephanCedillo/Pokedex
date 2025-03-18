@@ -1,0 +1,14 @@
+ <!--src/app/components/inventary-pokemon/inventary-pokemon.component.html -->
+
+<div id="inventory-container">
+    <!-- Display each Pokémon from localStorage -->
+    <div *ngFor="let pokemon of pokemons" class="pokemon-card" (click)="onClick(pokemon.id.toString())">
+      <div class="pokemon-info">
+        <img [src]="'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' + pokemon.id.toString() + '.png'" 
+             alt="{{ pokemon.name }} image" class="pokemon-img">
+        <span class="pokemon-name">{{ pokemon.name | titlecase }}</span>
+        <span class="pokemon-number">No. {{ pokemon.id }}</span>
+      </div>
+    </div>
+  </div>
+  

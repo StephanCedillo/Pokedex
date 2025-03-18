@@ -1,24 +1,60 @@
-<main  id="container">
-    <button (click)="toggleView()" class="toggle-button">Toggle View</button>
+ <!-- src/app/pages/home/home.component.html -->
 
-    <app-detail-pokemon
-        [pokemon]="selectedPokemon"
-        (clicker)="changeStateDetail()"
-        [openned]="detail"
-        [ngClass]="{openned: detail}"
-    ></app-detail-pokemon>
-    <app-photo-pokemon
-        [pokemon]="selectedPokemon"   
-        [ngClass]="{openned: detail}"
-    ></app-photo-pokemon>
-    <div id="cards-container" #cards (scroll)="onScroll($event)">
+<div class="navbar">
+    <button class="hamburger" (click)="toggleMenu()">&#9776;</button>
+    <nav class="nav" [class.active]="menuActive" >
+        <ul>
+            <li><button (click)="setActiveView('inicio')">Inicio</button></li>
+            <li><button (click)="setActiveView('detalle')">Detalle</button></li>
+            <li><button (click)="setActiveView('capturar')">Capturar</button></li>
+            <li><button (click)="setActiveView('avatar')">Avatar</button></li>
+            <li><button (click)="setActiveView('inventario')">Inventario</button></li>
+            <li><button (click)="toggleMenu()">Salir</button></li>
+        </ul>
+    </nav>
+    <div class="pokedex-title">
+        Pokedex
+    </div>
+</div>
+
+<main id="container">
+
+
+    <div id="cards-container" *ngIf="activeView === 'inicio'" #cards (scroll)="onScroll($event)">
         <app-card-pokemon 
             *ngFor="let pokemon of pokemonList"
-            [data]= "pokemon"
+            [data]="pokemon"
             [selected]="pokemon.name === selectedPokemon?.name"
             (clicked)="clickedCard($event)"
-        >
-        </app-card-pokemon>
+        ></app-card-pokemon>
         <img src="../../../assets/img/spinner.svg" alt="Loading" id="spinner" *ngIf='loading'>
+    </div>
+
+    <div class="pokemon-display" *ngIf="activeView === 'detalle'" id="pokemon-display">
+        <app-photo-pokemon
+            [pokemon]="selectedPokemon"
+            [ngClass]="{openned: detail}"
+        ></app-photo-pokemon>
+        <app-detail-pokemon
+            [pokemon]="selectedPokemon"
+            (clicker)="changeStateDetail()"
+            [openned]="detail"
+            [ngClass]="{openned: detail}"
+        ></app-detail-pokemon>
+    </div>
+
+    <div class="pokemon-cathing" *ngIf="activeView === 'capturar'">
+        <app-catching-pokemon></app-catching-pokemon><!-- Aquí puedes agregar contenido relacionado con capturar Pokémon -->
+    </div>
+    
+    <div class="pokemon-avatar" *ngIf="activeView === 'avatar' 'inicio' " #cards (scroll)="onScroll($event)">
+        <app-avatar-pokemon>
+
+            
+        </app-avatar-pokemon><!-- Aquí puedes agregar contenido relacionado con el avatar -->
+    </div>
+
+    <div class="pokemon-inventory" *ngIf="activeView === 'inventario'">
+        <app-inventary-pokemon></app-inventary-pokemon><!-- Aquí puedes agregar contenido relacionado con el inventario -->
     </div>
 </main>

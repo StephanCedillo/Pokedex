@@ -11,26 +11,7 @@ import { Observable } from 'rxjs';
 export class PokemonService {
 
 
- // private apiUrl = 'https://pokeapi.co/api/v2/pokemon/';
-
   constructor() { }
-//private http: HttpClient
- /*  getPokemon(name: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}${name.toLowerCase()}`);
-  }*/
-
-  // Definir un tipo para los tipos de Pokémon
-  /*private pokemonColors: { [key in 'fire' | 'water' | 'grass' | 'electric' | 'psychic' | 'ice' | 'dragon' | 'dark' | 'fairy']: string } = {
-    fire: '#F08030',
-    water: '#6890F0',
-    grass: '#78C850',
-    electric: '#F8D030',
-    psychic: '#F85888',
-    ice: '#98D8D8',
-    dragon: '#7038F8',
-    dark: '#705848',
-    fairy: '#EE99AC',
-  };*/
 
   async getByPage(page: number = 0, size: number = 100): Promise<Result[]> {
     const offset = size * page;
@@ -64,13 +45,4 @@ export class PokemonService {
     return texto.flavor_text;
   }
 
-  // Modificación aquí: usando tipos específicos de Pokémon para los colores
- /* getColorByType(types: string[]): string {
-    for (const type of types) {
-      if (this.pokemonColors[type as keyof typeof this.pokemonColors]) {
-        return this.pokemonColors[type as keyof typeof this.pokemonColors]; // Accede de forma segura al color
-      }
-    }
-    return '#FFFFFF'; // Blanco por defecto si no se encuentra un color
-  }*/
 }
