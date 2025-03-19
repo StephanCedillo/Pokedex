@@ -2,6 +2,65 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Modak&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap');
+
+.pokedex-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(to right, #ff0000, #cc0000);
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 10px;
+    width: 100%;
+    min-height: 50px; /* Asegura que el título no se colapse */
+}
+
+.pokedex-title span {
+    flex-shrink: 0;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 3px 8px;
+    border-radius: 5px;
+    gap: 5px;
+    width: auto;
+}
+
+.search-container input {
+    width: 60px; /* Reducimos el ancho */
+    padding: 4px;
+    border: none;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    text-align: center;
+    font-size: 14px;
+}
+
+.search-container input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 12px;
+}
+
+.search-container button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: white;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+
+
+
 #container {
     height: calc(100vh - 30px);
     display: grid;
@@ -116,6 +175,7 @@ app-detail-pokemon.openned {
         padding-right: 0;
     }
 }
+
 header {
     background: linear-gradient(135deg, #ff4e50, #f9d423);
     padding: 20px 0;
@@ -660,3 +720,54 @@ body {
     transform: scale(1.05);
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.7);
 }
+body {
+    font-family: 'Press Start 2P', cursive;
+    margin: 0;
+    padding: 0;
+    background-color: #dff6ff;
+  }
+  
+  #container, #cards-container, .pokemon-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  #container {
+    height: 100vh;
+  }
+  
+  #cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    margin-top:30px;
+    gap: 20px;
+    padding: 20px;
+    width: 100%;
+    max-width: 1200px;
+  }
+  
+  .card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .card img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .card p {
+    margin: 10px 0;
+  }
+  
+  @media (max-width: 600px) {
+    #cards-container {
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+  }
+  

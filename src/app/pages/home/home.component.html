@@ -1,19 +1,22 @@
  <!-- src/app/pages/home/home.component.html -->
 
-<div class="navbar">
+ <div class="navbar" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()">
     <button class="hamburger" (click)="toggleMenu()">&#9776;</button>
-    <nav class="nav" [class.active]="menuActive" >
-        <ul>
-            <li><button (click)="setActiveView('inicio')">Inicio</button></li>
-            <li><button (click)="setActiveView('detalle')">Detalle</button></li>
-            <li><button (click)="setActiveView('capturar')">Capturar</button></li>
-            <li><button (click)="setActiveView('avatar')">Avatar</button></li>
-            <li><button (click)="setActiveView('inventario')">Inventario</button></li>
-            <li><button (click)="toggleMenu()">Salir</button></li>
-        </ul>
+    <nav class="nav" [class.active]="menuActive">
+      <ul>
+        <li><button (click)="setActiveView('avatar')">Avatar</button></li>
+        <li><button (click)="setActiveView('inicio')">Inicio</button></li>
+        <li><button (click)="setActiveView('detalle')">Detalle</button></li>
+        <li><button (click)="setActiveView('capturar')">Capturar</button></li>
+        <li><button (click)="setActiveView('inventario')">Inventario</button></li>
+      </ul>
     </nav>
     <div class="pokedex-title">
-        Pokedex
+        <span>POKEDEX</span>
+    </div>
+    <div class="search-container" *ngIf="activeView === 'inicio'">
+        <input type="number" [(ngModel)]="searchNumber" placeholder="" />
+        <button (click)="searchPokemon()">🔍</button>
     </div>
 </div>
 

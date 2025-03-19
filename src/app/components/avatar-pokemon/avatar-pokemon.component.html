@@ -1,13 +1,13 @@
+
+<!-- src/app/components/avatar-pokemon/avatar-pokemon.component.html-->
 <header>
     <div id="container-title">
-      <h1>BIENVENIDO - Elige tu avatar</h1>
-      <img src="assets/img/pokeball.png" alt="Pokeball">
       <img src="assets/img/pokeball.png" alt="Pokeball">
     </div>
   </header>
   
   <!-- Si NO hay un avatar seleccionado, muestra la lista -->
-  <div *ngIf="!selectedAvatar">
+  <div *ngIf="!selectedAvatar" >
     <div *ngFor="let avatar of avatars" class="card">
       <div class="card-header">
         <span class="title">{{ avatar.title }}</span>
@@ -37,7 +37,10 @@
     <h2>Hola, soy {{ selectedAvatar.name }}.</h2>
     <p>{{ selectedAvatar.message }}</p>
     <img [src]="selectedAvatar.image" [alt]="selectedAvatar.title">
-  
+
+    <p class="level-title">Level: {{ selectedAvatar.level }}</p>
+    <progress id="progress" value="50" max="100"></progress>
+
     <button class="change-button" (click)="cambiarAvatar()">
       Cambiar personaje
     </button>

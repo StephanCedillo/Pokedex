@@ -17,23 +17,36 @@ export class AvatarPokemonComponent {
       type: 1,
       image: "assets/img/Ash.png",
       description: "Es un Entrenador Pokémon originario de Pueblo Paleta...",
-      message: "¡Hola! Soy Ash Ketchum, ¡voy a convertirme en un Maestro Pokémon!"
+      message: "¡Pokémon, te elijo a ti!",
+      level: 80, // Agregar un nivel para Ash
+
     },
     {
       title: "Brock",
       name: "Takeshi",
       type: 2,
       image: "assets/img/Brock.png",
-      description: "Es un criador Pokémon, y un verdadero experto cocinero...",
-      message: "Hola, soy Takeshi. ¡Te ayudaré en la captura de Pokémon!"
+      description: "Es un criador Pokémon, y un verdadero experto cocinero que siempre maravilla a los demás con sus platos. ",
+      message: "¡Lo dije! ¡La clave para ser un buen entrenador es conocer a tus Pokémon y confiar en ellos!",
+      level: 60,
     },
     {
       title: "Tracey Sketchit",
       name: "Kenji",
       type: 3,
       image: "assets/img/Tracey.png",
-      description: "Es un artista dibujante y observador Pokémon...",
-      message: "¡Hola! Soy Tracey y me encanta dibujar Pokémon."
+      description: "Es un artista dibujante y observador Pokémon, que se dedica a ver las costumbres de estas criaturas.",
+      message: "¡Mira este Pokémon, es una maravilla! ¡Voy a dibujarlo para capturar su esencia!",
+      level: 50,
+    },
+    {
+      title: "Maya",
+      name: "Maya",
+      type: 4,
+      image: "assets/img/Maya.png",
+      description: "Su objetivo siempre ha sido llegar a ser una gran coordinadora Pokémon, como lo fue su madre.",
+      message: "¡Vamos, no hay tiempo que perder! ¡Este Pokémon no se va a atrapar solo!",
+      level: 65,
     }
   ];
 

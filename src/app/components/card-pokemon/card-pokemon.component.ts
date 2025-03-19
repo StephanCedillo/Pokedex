@@ -45,7 +45,7 @@ export class CardPokemonComponent implements OnChanges {
     this.selectedPokemon = await this.pokemonService.getById(id);
   
     // Asigna correctamente la URL del sonido
-    const sonidoUrl = "./../assets/music/ring.mp3";  // Solo la URL como cadena
+    const sonidoUrl = ".//../assets/music/ring.mp3";  // Solo la URL como cadena
   
     if (sonidoUrl) {
       this.reproducirSonido(sonidoUrl);  // Reproduce el sonido si existe
