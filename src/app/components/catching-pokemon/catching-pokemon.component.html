@@ -1,21 +1,47 @@
-<div class="random-pokemon">
-    <button (click)="getRandomPokemon()" class="fixed-button">Obtener Pokémon Aleatorio</button>
+<div class="catching-container">
   
-    <div *ngIf="isLoading" class="loading-container">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0yxO-NzzSyUs_6ga4aK65j0oNfreNcpfS2A&s" alt="Cargando..." class="loading-gif">
-    </div>
-  
-    <div *ngIf="randomPokemon" class="poke-card">
-      <div class="poke-back">
-        <img [src]="randomPokemon.sprites.front_default" alt="{{ randomPokemon.name }}">
+  <div class="action-section" *ngIf="!isLoading && !randomPokemon">
+      <h1>¡Aatrapar Pokémon!</h1>
+      <p>Prueba tu suerte y mira qué aparece.</p>
+      <button (click)="getRandomPokemon()" class="catch-button">
+        <span class="pokeball-icon"></span> Lanza Pokéball
+      </button>
+  </div>
+
+
+  <div *ngIf="isLoading" class="loading-container">
+      <div class="pokeball-spinner">
+        <div class="pokeball-top"></div>
+        <div class="pokeball-bottom"></div>
+        <div class="pokeball-center"></div>
       </div>
-      <div class="poke-data">
-        <p class="poke-id">No. {{ randomPokemon.id }}</p>
-        <h2>{{ randomPokemon.name }}</h2>
-        <p class="poke-type">
-          <span *ngFor="let type of randomPokemon.types" [ngClass]="'text-' + type.type.name">{{ type.type.name }}</span>
-        </p>
+      <p class="loading-text">Capturando...</p>
+  </div>
+
+
+  <div *ngIf="randomPokemon && !isLoading" class="result-container animate-pop-in">
+      
+      <div class="success-banner">¡Pokémon Atrapado!</div>
+
+      <div class="poke-card animate-pop-in">
+          <div class="poke-image-container">
+              <img [src]="randomPokemon.sprites.front_default" alt="{{ randomPokemon.name }}" class="sprite animate-float">
+          </div>
+          
+          <div class="poke-data">
+              <p class="poke-id">N.º {{ randomPokemon.id | number:'3.0-0' }}</p> <h2 class="poke-name">{{ randomPokemon.name }}</h2>
+              
+              <div class="types-container">
+                  <span *ngFor="let type of randomPokemon.types" 
+                        class="type-badge" 
+                        [ngClass]="type.type.name">
+                      {{ type.type.name | titlecase }}
+                  </span>
+              </div>
+          </div>
       </div>
-    </div>
+
+      <button class="reset-button" (click)="resetView()">Intentar de nuevo</button>
+  </div>
+
 </div>
-  

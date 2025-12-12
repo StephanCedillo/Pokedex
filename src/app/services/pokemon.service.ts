@@ -44,5 +44,27 @@ export class PokemonService {
     const texto = resJson.flavor_text_entries.find((texto: any) => texto.language.name === 'es');
     return texto.flavor_text;
   }
+  async getByType(type: string): Promise<Result[]> {
+    const res = await fetch(`https://pokeapi.co/api/v2/type/${type}`);
+    const data = await res.json();
+    // La estructura de 'type' es diferente, hay que mapearla
+    return data.pokemon.map((p: any) => p.pokemon);
+  }
+
+  // 2. Filtrar por Generación
+  async getByGeneration(id: string): Promise<Result[]> {
+    const res = await fetch(`https://pokeapi.co/api/v2/generation/${id}`);
+    const data = await res.json();
+    
+    // Extraemos la especie y ordenamos por ID (la URL tiene el ID en la posición 6)
+    return data.pokemon_species
+      .map((p: any) => ({ name: p.name, url: p.url }))
+      .sort((a: any, b: any) => {
+        const idA = parseInt(a.url.split('/')[6]);
+        const idB = parseInt(b.url.split('/')[6]);
+        return idA - idB;
+      });
+  }
+  
 
 }

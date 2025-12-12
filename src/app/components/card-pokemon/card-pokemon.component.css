@@ -1,230 +1,107 @@
-@font-face {
-    font-family: 'Letra';
-    src: url('../../../assets/Letras/Gameplay.ttf') format('opentype');
-    font-weight: normal;
-    font-style: normal;
-}
-
-/* Contenedor principal */
-#container {
-    display: flex;
-    justify-content: center; /* Centra horizontalmente */
-    align-items: center; /* Centra verticalmente */
-    flex-direction: column; /* Asegura que el contenido esté en columna */
-    background-color: transparent;
-    padding: 10px;
-    box-sizing: border-box; /* Evita que los paddings alteren el tamaño */
-}
-
-/* Tarjeta */
-#tarjeta {
-    display: flex;
-    align-items: center;
-    justify-content: center; /* Centra el contenido */
-    background-color: #fcd556;
-    border-radius: 25px;
-    width: 100%; /* Ocupa todo el ancho */
-    max-width: 450px; /* No se hace demasiado grande */
-    padding: 1rem;
-    gap: 0.8rem;
-    transition: background-color 0.3s ease;
-    flex-wrap: wrap; /* Permite mejor distribución en móviles */
-    text-align: center;
-}
-#container:hover {
-    background-color: #0d8198; /* Cambia el fondo al pasar el mouse */
-}
-
-/* Círculo */
-#circulo {
-    width: 3rem;
-    height: 3rem;
-    border-radius: 50%;
-    background-color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Imagen del Pokémon */
-.pokemon-img {
-    width: 2.5rem;
-    height: auto;
-}
-
-/* Nombre y número del Pokémon */
-.pokemon-name {
-    font-family: 'Letra';
-    font-weight: bold;
-    font-size: 1rem;
-    color: #000;
-}
-
-/* Número del Pokémon */
-.pokemon-number {
-    font-family: 'Letra';
-    font-size: 0.9rem;
-    color: #b90e0e;
-}
-
-/* Efecto hover */
-#tarjeta:hover {
-    background-color: #0d8198;
-}
-
-/* Estilo responsivo para texto */
-@media screen and (max-width: 600px) {
-    .pokemon-name {
-        font-size: 0.8rem; /* Reduce el tamaño del nombre en pantallas pequeñas */
-    }
-
-    .pokemon-number {
-        font-size: 0.7rem; /* Reduce el tamaño del número */
-    }
-
-    #tarjeta {
-        padding: 0.8rem; /* Reduce el padding de la tarjeta en pantallas pequeñas */
-    }
-
-    .pokemon-img {
-        width: 2rem; /* Ajusta el tamaño de la imagen */
-    }
-}
-
-/* Flecha que aparece cuando se hace clic */
-#flecha {
-    display: none;
-    width: 2rem;
-    height: auto;
-    margin-top: 1rem;
-}
-
-.selected #flecha {
+/* Variables locales (puedes pasarlas a styles.css global si prefieres) */
+:host {
     display: block;
+    margin: 5px;
 }
 
-/* Responsividad de la flecha */
-@media screen and (max-width: 600px) {
-    #flecha {
-        width: 1.5rem;
-    }
-}
-#container {
-    overflow-y: auto; /* Permite desplazamiento vertical *//* Asegura que el contenedor ocupe toda la altura de la pantalla */
-}
-#tarjeta {
-    flex-wrap: wrap; /* Asegura que los elementos se ajusten mejor en pantallas pequeñas */
-}
-#tarjeta {
-    max-width: 100%; /* Asegura que la tarjeta no se desborde en pantallas pequeñas */
-    padding: 0.5rem;
-}
-/* Contenedor principal */
-#container {
+.card-container {
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: space-between;
+    background-color: #fcd556; /* Amarillo clásico */
+    border-radius: 15px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease-in-out;
+    border: 3px solid transparent;
+    position: relative;
+    overflow: hidden;
+    height: 80px; /* Altura fija para uniformidad */
+}
+
+/* Efecto Hover */
+.card-container:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    background-color: #ffde7a;
+}
+
+/* Estado Seleccionado */
+.card-container.selected {
+    background-color: #0d8198; /* Azul Pokedex */
+    border-color: #ffffff;
+}
+
+.card-container.selected .pokemon-name,
+.card-container.selected .pokemon-number {
+    color: white;
+}
+
+/* Indicador (Pokebola izquierda) */
+.indicator-box {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pokeball-icon {
+    width: 20px;
+    height: 20px;
+    animation: spin 0.5s ease-out;
+}
+
+/* Imagen Central */
+.sprite-box {
+    flex-grow: 0;
+    margin: 0 10px;
+}
+
+.pokemon-img {
+    width: 60px;
+    height: 60px;
+    image-rendering: pixelated; /* Importante para sprites */
+    filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.2));
+}
+
+/* Info Texto */
+.info-box {
+    flex-grow: 1;
+    text-align: right;
+    display: flex;
     flex-direction: column;
-    background-color: transparent;
-    padding: 10px;
-    box-sizing: border-box;
-    overflow-y: auto; /* Permite desplazamiento vertical */
-   /* Ocupa toda la altura de la pantalla */
-}
-
-/* Tarjeta */
-#tarjeta {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #fcd556;
-    border-radius: 25px;
-    width: 100%;
-    max-width: 450px;
-    padding: 1rem;
-    gap: 0.8rem;
-    transition: background-color 0.3s ease;
-    flex-wrap: wrap;
-    text-align: center;
-}
-
-/* Círculo */
-#circulo {
-    width: 3rem;
-    height: 3rem;
-    border-radius: 50%;
-    background-color: white;
-    display: flex;
-    align-items: center;
     justify-content: center;
 }
 
-/* Imagen del Pokémon */
-.pokemon-img {
-    width: 2.5rem;
-    height: auto;
-}
-
-/* Nombre y número del Pokémon */
-.pokemon-name {
-    font-family: 'Letra';
-    font-weight: bold;
-    font-size: 1rem;
-    color: #000;
-}
-
-/* Número del Pokémon */
 .pokemon-number {
-    font-family: 'Letra';
-    font-size: 0.9rem;
+    font-size: 0.75rem;
     color: #b90e0e;
-}
-
-/* Estilo responsivo para texto */
-@media screen and (max-width: 600px) {
-    .pokemon-name {
-        font-size: 0.8rem;
-    }
-
-    .pokemon-number {
-        font-size: 0.7rem;
-    }
-
-    #tarjeta {
-        padding: 0.8rem;
-        width: 100%;
-        max-width: 100%;
-    }
-
-    .pokemon-img {
-        width: 2rem;
-    }
-
-    #container {
-        height: auto; /* Ajusta la altura del contenedor */
-    }
-}
-
-/* Flecha que aparece cuando se hace clic */
-#flecha {
-    display: none;
-    width: 2rem;
-    height: auto;
-    margin-top: 1rem;
-}
-
-.selected #flecha {
+    font-weight: bold;
     display: block;
 }
 
-/* Responsividad de la flecha */
-@media screen and (max-width: 600px) {
-    #flecha {
-        width: 1.5rem;
-    }
+.pokemon-name {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #2c2c2c;
+    text-transform: capitalize;
 }
 
+/* Animación simple */
+@keyframes spin {
+    from { transform: rotate(-180deg); opacity: 0; }
+    to { transform: rotate(0); opacity: 1; }
+}
 
-#container {
-    overflow-y: auto; /* Permite desplazamiento vertical *//* Asegura que el contenedor ocupe toda la altura de la pantalla */
+/* Responsividad */
+@media (max-width: 480px) {
+    .card-container {
+        padding: 0.5rem;
+        height: auto;
+        flex-direction: row; /* Mantener fila en móvil */
+    }
+    .pokemon-name { font-size: 0.9rem; }
+    .pokemon-img { width: 50px; height: 50px; }
 }

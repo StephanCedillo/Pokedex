@@ -1,7 +1,6 @@
-import { Component, Input, OnChanges, Output, EventEmitter ,ViewChild} from '@angular/core';
-import { Result } from '../../interfaces/pokeapi';
+import { Component, Input, OnChanges, Output, EventEmitter, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PokemonService } from '../../services/pokemon.service';
+import { Result } from '../../interfaces/pokeapi';
 import { Pokemon } from '../../interfaces/pokemon';
 
 @Component({
@@ -9,58 +8,58 @@ import { Pokemon } from '../../interfaces/pokemon';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './card-pokemon.component.html',
-  styleUrl: './style.css'
+  styleUrl: './card-pokemon.component.css' // Asegúrate que sea .css o .scss según tu proyecto
 })
 export class CardPokemonComponent implements OnChanges {
   
-  ngOnChanges(): void {
-    this.extractInformation()
-  }
-
-  constructor(private pokemonService: PokemonService){}
-
-  @Input() data?:Result;
-  @Input() selected:boolean = false;
-  @Input() fullData?: Pokemon
+  @Input() data?: Result;          // Datos básicos de la lista
+  @Input() fullData?: Pokemon;     // Datos completos (si ya los tienes)
+  @Input() selected: boolean = false;
   @Output() clicked = new EventEmitter<string>(); 
-  id:string = "0";
-  audio: HTMLAudioElement = new Audio();
-  selectedPokemon?: Pokemon;
+  
+  id: string = "0";
+  // Pre-cargamos el audio para evitar lag al clickear
+  audio: HTMLAudioElement = new Audio('assets/music/ring.mp3'); 
+
+  ngOnChanges(changes: SimpleChanges): void {
+    // Solo extraemos información si cambian los datos de entrada
+    if (changes['data'] || changes['fullData']) {
+      this.extractInformation();
+    }
+  }
 
   extractInformation() {
-    if(this.data && this.data.url !== ""){
-      this.id = this.data.url.substring(34,this.data.url.length-1)
-      return
-    } if(this.fullData){
-      this.id = this.fullData.species.url.substring(42,this.fullData.species.url.length-1)
+    // CASO 1: Viene el objeto Pokemon completo
+    if (this.fullData) {
+      this.id = this.fullData.id.toString();
       this.data = {
-        name: this.fullData.species.name,
-        url: ""
-      }
+        name: this.fullData.name,
+        url: "" // No la necesitamos aquí
+      };
+      return;
+    }
+
+    // CASO 2: Viene de la lista (Result) -> Extraer ID de la URL de forma segura
+    if (this.data && this.data.url) {
+      // La URL es tipo: https://pokeapi.co/api/v2/pokemon/25/
+      // Dividimos por '/' y agarramos el penúltimo elemento o el que sea un número
+      const parts = this.data.url.split('/');
+      // Filtramos partes vacías y tomamos la última que sea un número
+      this.id = parts.filter(part => part !== '').pop() || "0";
     }
   }
 
-  async onClick(id: string) {
-    this.clicked.emit(id);
-    this.selectedPokemon = await this.pokemonService.getById(id);
-  
-    // Asigna correctamente la URL del sonido
-    const sonidoUrl = ".//../assets/music/ring.mp3";  // Solo la URL como cadena
-  
-    if (sonidoUrl) {
-      this.reproducirSonido(sonidoUrl);  // Reproduce el sonido si existe
-    } else {
-      console.error("No se encontró la URL del sonido para este Pokémon.");
-    }
+  onClick() {
+    // 1. Emitimos el evento al padre
+    this.clicked.emit(this.id);
+    
+    // 2. Reproducimos el sonido UI (Efecto visual/sonoro solamente)
+    this.reproducirSonido();
   }
   
-  reproducirSonido(url: string) {
-    this.audio.src = url;  // Usa la URL proporcionada
-    this.audio.load();
-    this.audio.volume = 0.5;  // Volumen ajustado
-    this.audio.play().catch((error) => {
-      console.error("Error al reproducir el sonido:", error);
-    });
+  reproducirSonido() {
+    this.audio.volume = 0.3; // Volumen suave
+    this.audio.currentTime = 0; // Reinicia el audio si le das click muy rápido
+    this.audio.play().catch(err => console.error("Error audio", err));
   }
-  
 }

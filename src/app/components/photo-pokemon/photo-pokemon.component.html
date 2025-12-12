@@ -1,3 +1,16 @@
-<div id="container">
-    <img [src]="animatedPhoto" alt="" *ngIf="pokemon">
+<div class="photo-container" [class]="primaryType" *ngIf="pokemon">
+    
+    <div class="glow-effect"></div>
+    
+    <div class="shadow-platform"></div>
+
+    <img [src]="animatedPhoto" 
+         [alt]="pokemon.name" 
+         class="pokemon-sprite floating"
+         (error)="handleError()">
+
+</div>
+
+<div class="empty-state" *ngIf="!pokemon">
+    <div class="pokeball-loader"></div>
 </div>

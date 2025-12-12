@@ -1,40 +1,124 @@
-#container {
+:host {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 250px; /* Altura mínima para que no colapse */
     display: flex;
     justify-content: center;
     align-items: center;
-    
-    width: 90vw; /* Usa un porcentaje del viewport */
-    max-width: 400px; /* Máximo tamaño en pantallas grandes */
-    aspect-ratio: 1; /* Mantiene el cuadrado */
-    border-radius: 25px;
-    
-    margin: auto; /* Centra horizontalmente */
 }
 
-/* Ajuste de la imagen dentro del contenedor */
-#container img {
-    width: 80%;
-    max-width: 100%;
-    height: auto;
-    image-rendering: pixelated;
+.photo-container {
+    position: relative;
+    width: 250px;
+    height: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%; /* Hace que el contenedor sea circular */
 }
 
-/* Pantallas pequeñas (móviles) */
-@media (max-width: 480px) {
-    #container {
-        width: 80vw; /* Más ancho en móviles */
-       /* Menos grosor */
-    }
-
-    #container img {
-        width: 90%; /* Imagen más grande en móviles */
-    }
+/* --- IMAGEN DEL POKÉMON --- */
+.pokemon-sprite {
+    height: 100%; 
+    max-height: 180px; /* Límite de altura */
+    width: auto;
+    z-index: 10;
+    image-rendering: pixelated; /* CRUCIAL: Mantiene los pixeles nítidos */
+    filter: drop-shadow(0 5px 10px rgba(0,0,0,0.3));
+    transition: transform 0.3s ease;
 }
 
-/* Tablets */
+/* Animación de flotación */
+.floating {
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+/* --- SOMBRA EN EL PISO --- */
+.shadow-platform {
+    position: absolute;
+    bottom: 20px;
+    width: 120px;
+    height: 15px;
+    background: rgba(0,0,0,0.2);
+    border-radius: 50%;
+    filter: blur(4px);
+    animation: shadowScale 3s ease-in-out infinite;
+    z-index: 1;
+}
+
+@keyframes shadowScale {
+    0%, 100% { transform: scale(1); opacity: 0.2; }
+    50% { transform: scale(0.8); opacity: 0.1; }
+}
+
+/* --- EFECTO DE GLOW (Fondo) --- */
+.glow-effect {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    z-index: 0;
+    opacity: 0.6;
+    background: radial-gradient(circle, var(--type-color, #ccc) 0%, transparent 70%);
+    filter: blur(20px);
+}
+
+/* --- COLORES DINÁMICOS POR TIPO --- */
+/* Asignamos variables CSS según la clase que pusimos en el HTML */
+.photo-container.fire { --type-color: #ff5350; }
+.photo-container.water { --type-color: #6390F0; }
+.photo-container.grass { --type-color: #7AC74C; }
+.photo-container.electric { --type-color: #F7D02C; }
+.photo-container.ice { --type-color: #96D9D6; }
+.photo-container.fighting { --type-color: #C22E28; }
+.photo-container.poison { --type-color: #A33EA1; }
+.photo-container.ground { --type-color: #E2BF65; }
+.photo-container.flying { --type-color: #A98FF3; }
+.photo-container.psychic { --type-color: #F95587; }
+.photo-container.bug { --type-color: #A6B91A; }
+.photo-container.rock { --type-color: #B6A136; }
+.photo-container.ghost { --type-color: #735797; }
+.photo-container.dragon { --type-color: #6F35FC; }
+.photo-container.dark { --type-color: #705746; }
+.photo-container.steel { --type-color: #B7B7CE; }
+.photo-container.fairy { --type-color: #D685AD; }
+.photo-container.normal { --type-color: #A8A77A; }
+
+
+/* --- ESTADO VACÍO (Pokeball loader) --- */
+.empty-state {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.5;
+}
+
+.pokeball-loader {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #ccc;
+    border-top-color: #ff5350;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Ajuste Responsive */
 @media (max-width: 768px) {
-    #container {
-        width: 70vw;
-        max-width: 320px;
+    .pokemon-sprite {
+        max-height: 140px;
+    }
+    .photo-container {
+        width: 200px;
+        height: 200px;
     }
 }

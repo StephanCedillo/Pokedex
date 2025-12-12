@@ -1,16 +1,19 @@
+<div class="card-container" (click)="onClick()" [class.selected]="selected">
+    
+  <div class="indicator-box">
+      <img src="assets/img/bola.png" alt="Selected" class="pokeball-icon" *ngIf="selected">
+  </div>
 
-<div id="container" [ngClass]="{selected: selected}">
-    
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    
-    <div id="tarjeta" (click)="onClick(id)" [ngClass]="{selected: selected}">
-        <div id="circulo"><img src="./../../../assets/img/bola.png" alt="" id="flecha" *ngIf="selected"></div>
-        
-        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{id}}.png" alt="" class="pokemon-img">
-        <span class="pokemon-number">No. {{id}}</span>
-        <span *ngIf="data" class="pokemon-name">{{data.name | titlecase}}</span>
-    </div>
+  <div class="sprite-box">
+      <img [src]="'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' + id + '.png'" 
+           alt="{{ data?.name }}" 
+           loading="lazy"
+           class="pokemon-img">
+  </div>
+
+  <div class="info-box">
+      <span class="pokemon-number">No. {{ id }}</span>
+      <span class="pokemon-name">{{ data?.name | titlecase }}</span>
+  </div>
+
 </div>
-
-  

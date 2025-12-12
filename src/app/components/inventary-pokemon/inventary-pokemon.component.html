@@ -1,14 +1,45 @@
- <!--src/app/components/inventary-pokemon/inventary-pokemon.component.html -->
-
-<div id="inventory-container">
-    <!-- Display each Pokémon from localStorage -->
-    <div *ngFor="let pokemon of pokemons" class="pokemon-card" (click)="onClick(pokemon.id.toString())">
-      <div class="pokemon-info">
-        <img [src]="'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' + pokemon.id.toString() + '.png'" 
-             alt="{{ pokemon.name }} image" class="pokemon-img">
-        <span class="pokemon-name">{{ pokemon.name | titlecase }}</span>
-        <span class="pokemon-number">No. {{ pokemon.id }}</span>
+<div class="inventory-container">
+    
+  <div class="inventory-header">
+      <div class="stats">
+          <h2>Caja Pokémon</h2>
+          <span class="count-badge">{{ pokemons.length }} Capturados</span>
       </div>
-    </div>
+      
+      <button *ngIf="pokemons.length > 0" class="btn-clear" (click)="clearInventory()">
+          Liberar Todos
+      </button>
   </div>
-  
+
+  <div *ngIf="pokemons.length === 0" class="empty-state">
+      <img src="https://cdn-icons-png.flaticon.com/512/287/287221.png" alt="Empty Box" class="empty-icon">
+      <h3>Tu caja está vacía</h3>
+      <p>¡Ve a la sección "Capturar" para conseguir tus primeros compañeros!</p>
+  </div>
+
+  <div class="pokemon-grid" *ngIf="pokemons.length > 0">
+      
+      <div *ngFor="let pokemon of pokemons; let i = index" 
+           class="pc-card animate-in" 
+           (click)="onClick(pokemon.id.toString())">
+          
+          <button class="btn-release" (click)="releasePokemon(i, $event)" title="Liberar Pokémon">
+              &times;
+          </button>
+
+          <div class="card-content">
+              <img [src]="pokemon.sprites.front_default" 
+                   alt="{{ pokemon.name }}" 
+                   class="pixel-art">
+              
+              <div class="info">
+                  <span class="number">No. {{ pokemon.id }}</span>
+                  <span class="name">{{ pokemon.name | titlecase }}</span>
+              </div>
+          </div>
+
+          <div class="type-bar" [class]="pokemon.types[0].type.name"></div>
+      </div>
+
+  </div>
+</div>

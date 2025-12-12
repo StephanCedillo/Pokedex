@@ -1,773 +1,550 @@
+/* --- VARIABLES & RESET --- */
+:host {
+    --pokedex-red: #dc0a2d;
+    --pokedex-dark-red: #a1061f;
+    --screen-bg: #dedede;
+    --ui-dark: #232323;
+    --ui-light: #ffffff;
+    --accent-blue: #3b4cca;
+    --navbar-height: 70px;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
 
-
-@import url('https://fonts.googleapis.com/css2?family=Modak&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap');
-
-.pokedex-title {
+/* --- NAVBAR --- */
+.navbar {
+    height: var(--navbar-height);
+    background-color: var(--pokedex-red);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: linear-gradient(to right, #ff0000, #cc0000);
-    color: white;
-    font-size: 20px;
-    font-weight: bold;
-    padding: 10px 15px;
-    border-radius: 10px;
-    width: 100%;
-    min-height: 50px; /* Asegura que el título no se colapse */
-}
-
-.pokedex-title span {
-    flex-shrink: 0;
-}
-
-.search-container {
-    display: flex;
-    align-items: center;
-    background: rgba(255, 255, 255, 0.2);
-    padding: 3px 8px;
-    border-radius: 5px;
-    gap: 5px;
-    width: auto;
-}
-
-.search-container input {
-    width: 60px; /* Reducimos el ancho */
-    padding: 4px;
-    border: none;
-    border-radius: 5px;
-    background: rgba(255, 255, 255, 0.2);
-    color: white;
-    text-align: center;
-    font-size: 14px;
-}
-
-.search-container input::placeholder {
-    color: rgba(255, 255, 255, 0.6);
-    font-size: 12px;
-}
-
-.search-container button {
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    color: white;
-    padding: 0;
-    display: flex;
-    align-items: center;
-}
-
-
-
-
-#container {
-    height: calc(100vh - 30px);
-    display: grid;
-    align-items: center;
-    grid-template-columns: 1.2fr 1fr;
-    background-image: url('https://preview.redd.it/pok%C3%A9mon-emerald-waterfall-animated-wallpaper-mobile-desktop-v0-3hydakwumwgb1.gif?format=png8&s=1006f93509e22b43b0af52b4dfdf513c728f90c1');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    padding: 20px;
-    gap: 10px;
-}
-
-/* Scroll personalizado */
-::-webkit-scrollbar {
-    width: 12px;
-}
-::-webkit-scrollbar-thumb {
-    background-color: #e9563d;
-    border-radius: 2px;
-    box-shadow: inset 0 0 0 2px #882a1a;
-    border-left: 1.5px solid transparent;
-    border-right: 1.5px solid transparent;
-    background-clip: padding-box;
-    cursor: grab;
-}
-::-webkit-scrollbar-track {
-    border: solid #90ace7 2px;
-    cursor: pointer;
-    background: repeating-linear-gradient(
-        0deg,
-        #276d83,
-        #276d83 5px,
-        #1c4760 7px,
-        #1c4760 9px
-    );
-}
-
-/* Foto del Pokémon */
-app-photo-pokemon {
-    margin-left: 120px;
-    transition: 0.5s ease-in-out;
-}
-
-
-app-detail-pokemon.openned {
-    left: 0;
-}
-
-/* Contenedor de cartas */
-#cards-container {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    max-height: 100%;
-    overflow-y: scroll;
-    margin-left: auto;
-    padding-right: 20px;
-}
-#cards-container {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    max-height: 100%;
-    overflow-y: scroll;
-    margin-left: auto;
-    padding-right: 20px;
-}
-.pokemon-inventory{
-    
-    display: flex;
-    flex-direction: column;
-    gap: 10px; /* Espacio entre cartas */
-    padding: 15px; /* Espaciado interno */
-    width: 100%; /* Ocupar todo el ancho disponible */
-    height: 100%;
-    max-height: 100%;
-    overflow-y: auto;
-    padding-right: 15px;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    max-height: 100%;
-    overflow-y: scroll;
-    margin-left: auto;
-    padding-right: 20px;
-}
-/* Botón de alternancia */
-.toggle-button {
-    position: absolute;
-    left: 10px;
-    top: 10px;
-    z-index: 10;
-    padding: 10px;
-    background: #ff0000;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-/* Responsivo */
-@media (max-width: 1024px) {
-    #container {
-        grid-template-columns: 1fr; /* Se apila en una sola columna */
-        padding: 10px;
-    }
-    app-photo-pokemon {
-        margin-left: 0;
-    }
-    #cards-container {
-        padding-right: 0;
-    }
-}
-
-header {
-    background: linear-gradient(135deg, #ff4e50, #f9d423);
-    padding: 20px 0;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    border-bottom: 5px solid #d62828;
-    position: relative;
-    overflow: hidden;
-}
-@media (max-width: 600px) {
-    .toggle-button {
-        left: 50%;
-        transform: translateX(-50%);
-    }
-}
-#container {
-    height: calc(100vh - 30px);
-    display: grid;
-    align-items: center;
-    grid-template-columns: 1.2fr 1fr;
-    background-image: url('https://preview.redd.it/pok%C3%A9mon-emerald-waterfall-animated-wallpaper-mobile-desktop-v0-3hydakwumwgb1.gif?format=png8&s=1006f93509e22b43b0af52b4dfdf513c728f90c1');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    padding: 20px;
-    gap: 10px;
-    overflow: hidden;
-}
-
-/* Contenedor de cartas */
-#cards-container {
-    display: flex;
-    flex-direction: column;
-    gap: 10px; /* Espacio entre cartas */
-    padding: 15px; /* Espaciado interno */
-    width: 100%; /* Ocupar todo el ancho disponible */
-    height: 100%;
-    max-height: 100%;
-    overflow-y: auto;
-    padding-right: 15px;
-    box-sizing: border-box;
-}
-
-/* Cartas */
-app-card-pokemon {
-    width: 100%; /* Que se adapten al contenedor */
-     /* Para que no sean demasiado anchas */
-    margin: 0 auto; /* Centrado */
-}
-
-/* Ajuste para móviles */
-@media (max-width: 900px) {
-    #container {
-        grid-template-columns: 1fr;
-        padding: 10px;
-    }
-    .pokemon-inventory{
-        height: 100vh; /* Reducido a 40% de la pantalla */
-        max-height: 100vh;
-        overflow-y: auto;
-        padding: 10px;
-        padding-bottom: 15px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-    }
-    #cards-container {
-    /* Reducido a 40% de la pantalla */
-        max-height: 100vh;
-        overflow-y: auto;
-        padding: 10px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    app-photo-pokemon.openned {
-        margin-left: 0;
-    }
-    app-photo-pokemon {
-        z-index: 1;
-        transition: 0.5s ease-in-out;
-    }
-
-    
-}
-
-@media (max-width: 600px) {
-    .toggle-button {
-        left: 50%;
-        transform: translateX(-50%);
-    }
-
-}
-
-
-
-.toggle-button {
-    background-color: #007bff; /* Azul */
-}
-
-
-
-/* Estilo global */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* Barra de navegación */
-.navbar {
+    padding: 0 20px;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 1000;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #b8c2b615;
-    padding: 1px 1px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    border-bottom: 5px solid var(--pokedex-dark-red);
 }
 
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
 
+/* Marca Pokédex (Luz azul) */
+.pokedex-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 800;
+    color: white;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+}
 
-/* Botón hamburguesa */
-.navbar .hamburger {
-    background-color: #007bff;
-    width: 100%;
-    display: none; /* Oculto por defecto, se muestra solo en pantallas pequeñas */
+.blue-light {
+    width: 30px;
+    height: 30px;
+    background: radial-gradient(circle at 30% 30%, #5dcaff, #2196f3);
+    border-radius: 50%;
+    border: 3px solid white;
+    box-shadow: 0 0 10px rgba(33, 150, 243, 0.6);
+}
+
+/* Hamburguesa */
+.hamburger {
     background: none;
     border: none;
-    font-size: 30px;
-    color: white;
     cursor: pointer;
-    margin-left:23rem;
-}
-
-/* Estilo del menú lateral (side menu) */
-.navbar .nav {
-    position: fixed;
-    top: 0;
-    left: -250px; /* Inicialmente fuera de la pantalla */
-    width: 250px;
-    height: 100vh;
-    background-color: #34495e;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    padding: 20px;
-    transition: left 0.3s ease;
-    z-index: 1000;
+    gap: 5px;
+    padding: 5px;
+    z-index: 1001;
 }
 
-/* Estilo de la lista */
-.navbar .nav ul {
+.hamburger .bar {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    border-radius: 2px;
+    transition: 0.3s;
+}
+
+/* Menú Desplegable */
+.nav-menu {
+    position: absolute;
+    top: var(--navbar-height);
+    left: -250px;
+    width: 250px;
+    height: calc(100vh - var(--navbar-height));
+    background-color: var(--ui-dark);
+    transition: left 0.3s ease-in-out;
+    box-shadow: 4px 0 10px rgba(0,0,0,0.5);
+    padding-top: 20px;
+}
+
+.nav-menu.active {
+    left: 0;
+}
+
+.nav-menu ul {
     list-style: none;
     padding: 0;
+    margin: 0;
+}
+
+.nav-menu li button {
     width: 100%;
-}
-
-.navbar .nav ul li {
-    margin: 15px 0;
-}
-
-/* Botones dentro del menú */
-.navbar .nav button {
-    
     background: none;
     border: none;
-    color: white;
-    font-size: 16px;
-    font-family: Poetsen One;
-    font-weight: bold;
-    cursor: pointer;
-    padding: 10px 20px;
-    width: 100%;
+    color: #bbb;
+    padding: 15px 25px;
     text-align: left;
-    transition: background-color 0.3s ease;
+    font-size: 1.1rem;
+    cursor: pointer;
+    border-left: 4px solid transparent;
+    transition: 0.2s;
 }
 
-/* Efecto de hover en los botones */
-.navbar .nav button:hover {
-    background-color: #378d58;
-    border-radius: 5px;
+.nav-menu li button:hover {
+    color: white;
+    background-color: rgba(255,255,255,0.1);
 }
 
-/* Mostrar el menú cuando se activa */
-.navbar .nav.active {
-    left: 0; /* Mueve el menú a la vista */
+.nav-menu li.active-link button {
+    color: var(--pokedex-red);
+    border-left-color: var(--pokedex-red);
+    background-color: rgba(220, 10, 45, 0.1);
+    font-weight: bold;
 }
 
-/* Mostrar el contenido principal cuando el menú está abierto */
-body {
-    margin-left: 0;
-    padding-left: 0;
-    transition: margin-left 0.3s ease;
+/* --- BUSCADOR --- */
+.search-wrapper {
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-end;
 }
 
-.navbar .nav.active + body {
-    margin-left: 250px; /* Deja espacio para el menú lateral */
+.search-group {
+    display: flex;
+    gap: 10px;
+    align-items: center;
 }
 
-/* Menú horizontal para pantallas grandes */
-/* Estilo del navbar para pantallas grandes */
-@media (min-width: 769px) {
-    .navbar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 2px 10px;
+/* Estilo para los Selectores */
+.search-group select {
+    padding: 5px 10px;
+    border-radius: 20px;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: var(--ui-dark);
+    font-weight: 600;
+    cursor: pointer;
+    outline: none;
+    height: 35px;
+    font-size: 0.9rem;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
+    border: 2px solid transparent;
+    transition: all 0.2s;
+}
+
+.search-group select:hover,
+.search-group select:focus {
+    background-color: #fff;
+    border-color: var(--pokedex-dark-red);
+}
+
+.search-box {
+    display: flex;
+    background: white;
+    border-radius: 20px;
+    padding: 5px 10px;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
+    border: 2px solid var(--pokedex-dark-red);
+    height: 35px;
+}
+
+.search-box input {
+    border: none;
+    outline: none;
+    width: 120px;
+    font-weight: bold;
+    color: var(--ui-dark);
+}
+
+.search-box input::-webkit-outer-spin-button,
+.search-box input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.search-box button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* --- CONTENEDOR PRINCIPAL --- */
+#main-container {
+    margin-top: var(--navbar-height);
+    height: calc(100vh - var(--navbar-height));
+    background-color: var(--screen-bg);
+    overflow: hidden;
+    position: relative;
+}
+
+/* --- VISTA: INICIO (GRID DE CARTAS) --- */
+#cards-container {
+    height: 100%;
+    overflow-y: auto;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 20px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--pokedex-red) #eee;
+}
+
+#cards-container::-webkit-scrollbar {
+    width: 8px;
+}
+#cards-container::-webkit-scrollbar-thumb {
+    background-color: var(--pokedex-red);
+    border-radius: 4px;
+}
+
+/* Spinner */
+.spinner-container {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+.spinner {
+    width: 50px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin { 
+    100% { transform: rotate(360deg); } 
+}
+
+/* --- OTRAS VISTAS (GENÉRICAS) --- */
+.view-container {
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+/* ============================================================
+   AQUÍ ESTÁ LA LÓGICA MEJORADA PARA LA VISTA DE DETALLE
+   ============================================================ */
+
+.detail-view {
+    background: rgba(0,0,0,0.9); /* Fondo muy oscuro */
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 50;
+    /* Flexbox para manejar layout PC vs Móvil */
+    display: flex;
+    flex-direction: row; /* Defecto: Lado a Lado (PC) */
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* Evitamos scroll en el contenedor padre */
+}
+
+/* Estilos de los hijos en PC */
+.detail-view app-photo-pokemon {
+    flex: 1; /* Ocupa 50% */
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Ajuste para que la foto no se coma el espacio */
+    min-width: 300px;
+}
+
+.detail-view app-detail-pokemon {
+    flex: 1; /* Ocupa 50% */
+    height: 100%;
+    overflow-y: auto; /* Scroll interno si el texto es largo */
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+
+/* --- RESPONSIVIDAD (MEDIA QUERIES) --- */
+
+@media (max-width: 768px) {
+    
+    /* Ajustes del Buscador en Móvil */
+    .search-group {
+        gap: 5px;
+    }
+    .search-group select {
+        width: 70px;
+        font-size: 0.8rem;
+        padding: 5px;
+    }
+    .search-box input {
+        width: 90px;
     }
 
-    .navbar .nav {
-        position: static; /* Se vuelve parte del flujo normal */
-        width: auto;
+    /* =========================================
+       AJUSTE DE DETALLE PARA MÓVIL (Arriba/Abajo)
+       ========================================= */
+    .detail-view {
+        flex-direction: column; /* Cambia a columna vertical */
+    }
+
+    .detail-view app-photo-pokemon {
+        flex: none; /* Quitamos flex grow */
+        height: 35vh; /* La foto ocupa el 35% superior de la pantalla */
+        width: 100%;
+        min-width: auto;
+        border-bottom: 2px solid rgba(255,255,255,0.1);
+        z-index: 2;
+    }
+
+    .detail-view app-detail-pokemon {
+        flex: 1; /* El detalle ocupa TODO el espacio restante */
+        width: 100%;
         height: auto;
-        display: flex;
-        flex-direction: row; /* Asegura que los elementos estén en línea */
-        background-color: transparent; /* Fondo transparente en pantallas grandes */
-        align-items: center;
+        padding: 0; /* Quitamos padding extra */
+        /* Importante: permite scroll si el contenido es largo */
+        overflow-y: auto; 
+    }
+}
+
+@media (max-width: 480px) {
+    #cards-container {
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+        gap: 10px;
+        padding: 10px;
     }
 
-    /* Los botones dentro del nav se alinean en una fila */
-    .navbar .nav ul {
-        display: flex;
-        flex-direction: row;
-        gap: 15px; /* Espacio entre elementos */
-    }
-
-    .navbar .nav ul li {
-        margin: 0;
-    }
-
-    .navbar .nav button {
-        width: auto;
-        padding: 10px 15px;
-        background: none;
-        text-align: center;
-        font-size: 14px;
-    }
-
-    /* Oculta el menú lateral en pantallas grandes */
-    .navbar .nav.active {
-        left: auto;
-    }
-
-    /* Oculta el botón hamburguesa en pantallas grandes */
-    .navbar .hamburger {
+    .pokedex-brand span {
         display: none;
     }
-}
 
-/* Mostrar el botón hamburguesa solo en pantallas pequeñas */
-@media (max-width: 768px) {
-    .navbar .nav {
-        left: -250px; /* Inicialmente fuera de la pantalla */
-    }
-
-    .navbar .hamburger {
-        display: block; /* Muestra el botón hamburguesa */
-    }
-
-    .navbar .nav.active {
-        left: 0; /* Mueve el menú a la vista */
-    }
-
-    body {
-        transition: margin-left 0.3s ease;
-    }
-
-    /* Ajustes de estilo cuando el menú está abierto */
-    .navbar .nav.active + body {
-        margin-left: 250px;
+    .search-group {
+        flex-wrap: wrap;
+        justify-content: flex-end;
     }
 }
-.pokemon-display {
+
+
+
+/* Agrupador de elementos de búsqueda */
+.search-group {
     display: flex;
-    flex-direction: column;
+    gap: 10px;
     align-items: center;
+    flex-wrap: wrap; /* Permite que bajen de línea en móviles */
     justify-content: center;
-    width: 100%;
-    max-width: 1200px; /* Evita que sea demasiado ancho en pantallas grandes */
-    margin: 0 auto;
-    padding: 20px;
-    gap: 15px;
-    background: rgba(0, 0, 0, 0.5); /* Fondo semitransparente para resaltar */
-    border-radius: 15px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* Ajuste para tablets */
-@media (max-width: 1024px) {
-    .pokemon-display {
-        flex-direction: column;
-        max-width: 100%;
-        padding: 15px;
-        background: rgba(0, 0, 0, 0.6);
-    }
+/* Estilo de los Selects */
+.filter-select {
+    padding: 0 10px;
+    height: 35px;
+    border-radius: 20px;
+    border: 2px solid #a1061f; /* Color oscuro pokedex */
+    background-color: white;
+    color: #333;
+    font-weight: 600;
+    cursor: pointer;
+    outline: none;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
 }
 
-/* Ajuste para móviles */
-@media (max-width: 600px) {
-    .pokemon-display {
-        width: 100%;
-        padding: 10px;
-        gap: 10px;
-        background: rgba(0, 0, 0, 0.7);
+.filter-select:hover {
+    background-color: #f0f0f0;
+}
+
+/* Ajustes Responsive */
+@media (max-width: 768px) {
+    .search-group {
+        gap: 5px;
     }
     
-    app-photo-pokemon,
-    app-detail-pokemon {
-        width: 100%;
+    .filter-select {
+        font-size: 0.8rem;
+        padding: 0 5px;
+        max-width: 100px; /* Limitar ancho en móvil */
     }
 }
 
-.pokemon-display {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    width: 100%;
-    max-width: 1200px; /* To prevent it from becoming too wide on large screens */
-    margin: 0 auto;
-    padding: 20px;
-    gap: 15px;
-    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-    border-radius: 15px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    overflow-y: auto; /* Enable vertical scrolling */
-    max-height: 80vh; /* Limit the height */
-}
-
-/* Ensuring it's scrollable */
-#pokemon-display::-webkit-scrollbar {
-    width: 10px;
-}
-
-#pokemon-display::-webkit-scrollbar-thumb {
-    background-color: #e9563d;
-    border-radius: 5px;
-}
-
-#pokemon-display::-webkit-scrollbar-track {
-    background: #1c4760;
-}
-/* General styles for the navbar */
-.navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #a81717fe;
-    padding: 5px 5px;
-}
-
-/* Style the hamburger button */
-.navbar .hamburger {
-    background-color: #007bff;
-    width: 40px;
-    height: 40px;
-    display: none; /* Initially hidden on large screens */
-    background: none;
-    border: none;
-    font-size: 30px;
-    color: white;
-    cursor: pointer;
-    margin-left: 15px;
-    padding: 0;
-    transition: transform 0.3s ease; /* Added transition for smooth effect */
-}
-
-/* Add an animation for hamburger button when clicked */
-.navbar .hamburger.active {
-    transform: rotate(90deg); /* Rotate when active */
-}
-
-/* Style the side navigation menu */
-.navbar .nav {
-    position: fixed;
-    top: 0;
-    left: -250px; /* Initially out of the screen */
-    width: 250px;
-    height: 100vh;
-    background-color: #9c2020;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    padding: 20px;
-    transition: left 0.3s ease, box-shadow 0.3s ease; /* Added shadow transition */
-    z-index: 1000;
-    box-shadow: 4px 0 10px rgba(133, 14, 14, 0.731);
-}
-
-/* Style for the menu when it's active */
-.navbar .nav.active {
-    left: 0; /* Make the menu visible */
-    box-shadow: 5px 0 15px rgba(0, 0, 0, 0.3); /* Enhanced shadow when the menu is open */
-}
-
-/* Style for each link in the menu */
-.navbar .nav ul li {
-    list-style: none;
-    margin: 10px 0;
-    width: 100%;
-    text-align: left;
-}
-
-/* Style for links in the menu */
-.navbar .nav ul li a {
-    color: #ffffff;
-    text-decoration: none;
-    font-size: 18px;
-    padding: 10px;
-    display: block;
-    transition: background-color 0.3s ease, padding-left 0.3s ease;
-}
-
-/* Hover effect for links */
-.navbar .nav ul li a:hover {
-    background-color: #007bff;
-    padding-left: 20px; /* Slight indentation when hovered */
-}
-
-/* Display horizontal navbar on larger screens */
-@media (min-width: 769px) {
-    .navbar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 10px;
-    }
-
-    .navbar .nav {
-        position: static;
-        display: flex;
-        flex-direction: row;
-        width: auto;
-        height: auto;
-        background-color: transparent;
-        align-items: center;
-        box-shadow: none; /* Remove shadow on large screens */
-    }
-
-    .navbar .nav ul {
-        display: flex;
-        flex-direction: row;
-        gap: 20px;
-    }
-
-    .navbar .nav button {
-        width: auto;
-        padding: 10px 20px;
-        background: none;
-        text-align: center;
-        font-size: 14px;
-    }
-
-    .navbar .hamburger {
-        display: none; /* Hide the hamburger button on larger screens */
-    }
-}
-
-/* Show the hamburger button and make the menu mobile-friendly for smaller screens */
+/* =========================================================
+   RESPONSIVIDAD MÓVIL (CORREGIDA PARA QUE NO SE MONTE)
+   ========================================================= */
 @media (max-width: 768px) {
-    .navbar .nav {
-        left: -250px; /* Initially hide the menu off-screen */
+    
+    /* 1. Navbar crece para acomodar elementos en varias filas */
+    .navbar {
+        height: auto; /* Ya no es altura fija de 70px */
+        min-height: 70px;
+        flex-wrap: wrap; /* Permite que los elementos bajen de línea */
+        padding: 10px 15px;
+        gap: 10px; /* Espacio entre filas */
     }
 
-    .navbar .hamburger {
-        display: block; /* Show the hamburger button */
+    /* 2. La parte izquierda (Logo y Hamburguesa) ocupa toda la fila superior */
+    .nav-left {
+        width: 100%;
+        justify-content: space-between; /* Hamburguesa izq - Logo der */
+        margin-bottom: 5px;
     }
 
-    /* Show the menu when active */
-    .navbar .nav.active {
-        left: 0;
+    /* 3. El contenedor del buscador baja a la segunda fila */
+    .search-wrapper {
+        width: 100%;
+        order: 3; /* Asegura que quede debajo del logo */
+        justify-content: center;
     }
 
-    body {
-        transition: margin-left 0.3s ease;
+    /* 4. Grid para organizar Filtros y Input bonito */
+    .search-group {
+        display: grid;
+        width: 100%;
+        /* Diseño: Los dos selectores arriba, el buscador abajo */
+        grid-template-columns: 1fr 1fr; 
+        gap: 10px;
     }
 
-    .navbar .nav.active + body {
-        margin-left: 250px; /* Shift the body when the menu is active */
+    /* 5. Estilo de los Selectores (Gen y Tipo) en móvil */
+    .filter-select {
+        width: 100%; /* Que ocupen todo su espacio */
+        max-width: none;
+        height: 40px; /* Un poco más altos para dedos táctiles */
+        font-size: 0.85rem;
+        /* Texto centrado o recortado elegantemente */
+        text-overflow: ellipsis; 
+        white-space: nowrap;
+        overflow: hidden;
     }
 
-    /* Add a nice transition for the background of the links */
-    .navbar .nav ul li a {
-        transition: background-color 0.3s ease, color 0.3s ease;
+    /* 6. La caja de búsqueda (Input) ocupa todo el ancho inferior */
+    .search-box {
+        grid-column: 1 / -1; /* Ocupa las dos columnas del grid */
+        width: 100%;
+        height: 40px;
     }
 
-    /* Adjust the size of the text and add padding for smaller screens */
-    .navbar .nav ul li a {
-        font-size: 16px;
-        padding: 15px;
+    /* 7. El input interno se estira */
+    .search-box input {
+        width: 100%;
+        flex-grow: 1; /* Llena el espacio sobrante */
+        min-width: 0; /* Evita desbordamiento flex */
+    }
+
+    /* Ajuste extra: Mover el contenedor principal hacia abajo 
+       porque la navbar ahora es más alta */
+    #main-container {
+        margin-top: 140px; /* Ajusta este valor según la altura real que tome tu navbar */
     }
 }
-.pokemon-avatar {
-    width: 100%;
-    max-height: 100vh; /* Ajusta la altura según necesites */
-    overflow-y: auto; /* Habilita el scroll vertical */
-    border: 2px solid #ccc; /* Opcional, solo para visualizar el contenedor */
-    padding: 10px;
-}
-.pokedex-title {
-    font-size: 20px;
-    font-weight: bold;
-    text-transform: uppercase;
-    color: #fff;
-    background: #d32f2f;
-    padding: 15px 25px;
-    border-radius: 12px;
-    display: inline-block;
-    text-align: center;
-    border: 4px solid #8b0000;
-    box-shadow: 0px 6px 0px #8b0000, 0px 6px 12px rgba(0, 0, 0, 0.5);
-    letter-spacing: 2px;
-    transition: transform 0.2s ease-in-out;
-    position: relative;
-    font-family: 'Press Start 2P', cursive; /* Fuente pixelada estilo retro */
-}
 
-.pokedex-title::before {
-    content: "";
-    position: absolute;
-    top: 8px;
-    left: 12px;
-    width: 12px;
-    height: 8px;
-    background-color: #ffcc00;
-    border-radius: 50%;
-    box-shadow: 0px 0px 8px rgba(255, 204, 0, 0.8);
-}
-
-.pokedex-title:hover {
-    transform: scale(1.05);
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.7);
-}
-body {
-    font-family: 'Press Start 2P', cursive;
-    margin: 0;
-    padding: 0;
-    background-color: #dff6ff;
-  }
-  
-  #container, #cards-container, .pokemon-display {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  #container {
-    height: 100vh;
-  }
-  
-  #cards-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    margin-top:30px;
-    gap: 20px;
-    padding: 20px;
-    width: 100%;
-    max-width: 1200px;
-  }
-  
-  .card {
-    background-color: white;
-    border-radius: 10px;
-    padding: 10px;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  }
-  
-  .card img {
-    width: 100%;
-    height: auto;
-  }
-  
-  .card p {
-    margin: 10px 0;
-  }
-  
-  @media (max-width: 600px) {
-    #cards-container {
-      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+/* Ajuste específico para pantallas MUY pequeñas (como iPhone SE) */
+@media (max-width: 380px) {
+    #main-container {
+        margin-top: 150px;
     }
-  }
-  
+}
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================================
+   RESPONSIVIDAD MÓVIL (CORREGIDA PARA QUE NO SE MONTE)
+   ========================================================= */
+   @media (max-width: 768px) {
+    
+    /* 1. Navbar crece para acomodar elementos en varias filas */
+    .navbar {
+        height: auto; /* Ya no es altura fija de 70px */
+        min-height: 70px;
+        flex-wrap: wrap; /* Permite que los elementos bajen de línea */
+        padding: 10px 15px;
+        gap: 10px; /* Espacio entre filas */
+    }
+
+    /* 2. La parte izquierda (Logo y Hamburguesa) ocupa toda la fila superior */
+    .nav-left {
+        width: 100%;
+        justify-content: space-between; /* Hamburguesa izq - Logo der */
+        margin-bottom: 5px;
+    }
+
+    /* 3. El contenedor del buscador baja a la segunda fila */
+    .search-wrapper {
+        width: 100%;
+        order: 3; /* Asegura que quede debajo del logo */
+        justify-content: center;
+    }
+
+    /* 4. Grid para organizar Filtros y Input bonito */
+    .search-group {
+        display: grid;
+        width: 100%;
+        /* Diseño: Los dos selectores arriba, el buscador abajo */
+        grid-template-columns: 1fr 1fr; 
+        gap: 10px;
+    }
+
+    /* 5. Estilo de los Selectores (Gen y Tipo) en móvil */
+    .filter-select {
+        width: 100%; /* Que ocupen todo su espacio */
+        max-width: none;
+        height: 40px; /* Un poco más altos para dedos táctiles */
+        font-size: 0.85rem;
+        /* Texto centrado o recortado elegantemente */
+        text-overflow: ellipsis; 
+        white-space: nowrap;
+        overflow: hidden;
+    }
+
+    /* 6. La caja de búsqueda (Input) ocupa todo el ancho inferior */
+    .search-box {
+        grid-column: 1 / -1; /* Ocupa las dos columnas del grid */
+        width: 85%;
+        height: 40px;
+    }
+
+    /* 7. El input interno se estira */
+    .search-box input {
+        width: 100%;
+        flex-grow: 1; /* Llena el espacio sobrante */
+        min-width: 0; /* Evita desbordamiento flex */
+    }
+
+    /* Ajuste extra: Mover el contenedor principal hacia abajo 
+       porque la navbar ahora es más alta */
+    #main-container {
+        margin-top: 140px; /* Ajusta este valor según la altura real que tome tu navbar */
+    }
+}
+
+/* Ajuste específico para pantallas MUY pequeñas (como iPhone SE) */
+@media (max-width: 380px) {
+    #main-container {
+        margin-top: 150px;
+    }
+}
